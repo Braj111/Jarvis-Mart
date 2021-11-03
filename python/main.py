@@ -10,6 +10,10 @@ class cust_class(object):
 
 # function prototypes
 def add_cust():
+    client = pymongo.MongoClient("mongodb+srv://harsh92:harsh92@cluster0.ldhgj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    db = client["g10"]
+    collection = db["cust_db"]
+
     name = input("Enter name: ")
     age = int(input("Enter age: "))
     phone = int(input("Enter phone no.: "))
@@ -22,17 +26,29 @@ def add_cust():
 
 # remove function -  works fine but there's a clash with _id
 def remove_cust():
+    client = pymongo.MongoClient("mongodb+srv://harsh92:harsh92@cluster0.ldhgj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    db = client["g10"]
+    collection = db["cust_db"]
+
     cust_id = int(input("Enter Customer ID: "))
     collection.delete_one({"_id": cust_id})
 
 # FUNCTIONS TO FETCH DATA
 def fetch_by_id():
+    client = pymongo.MongoClient("mongodb+srv://harsh92:harsh92@cluster0.ldhgj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    db = client["g10"]
+    collection = db["cust_db"]
+
     cust_id = int(input("Enter Customer ID: "))
     cust = collection.find_one({"_id": cust_id})
     customer = cust_class(cust)
     print(customer.Name)
 
 def fetch_by_phone():
+    client = pymongo.MongoClient("mongodb+srv://harsh92:harsh92@cluster0.ldhgj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    db = client["g10"]
+    collection = db["cust_db"]
+
     phone = int(input("Enter Phone No.: "))
     cust = collection.find_one({"Phone": phone})
     customer = cust_class(cust)
@@ -41,12 +57,9 @@ def fetch_by_phone():
     
 
 # main 
-if __name__ == "__main__":
-    # connection to db
-    client = pymongo.MongoClient("mongodb+srv://harsh92:harsh92@cluster0.ldhgj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-    db = client["g10"]
-    collection = db["cust_db"]
-
+#if __name__ == "__main__":
+    # connection to db  
+    
 
     # calling function to add new customer to the database
     #add_cust()
@@ -56,7 +69,7 @@ if __name__ == "__main__":
     #remove_cust()
 
     # function call to fetch doc by id
-    fetch_by_id()
+    #fetch_by_id()
 
     # funciton call to fetch doc by phone number
     #fetch_by_phone()
