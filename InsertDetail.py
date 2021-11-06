@@ -110,11 +110,11 @@ class Insert_detail_page(tk.Frame):
                                                            bg='#3d3d5c')
             Conf_Label.grid(row=7,column=1,pady=5)
             #controller.show_frame('MenuPage')
-            Name_box.set('')
-            Age_box.set('')
-            Phone_box.set('')
-            Amount_box.set('')
-            freq_box.set('')
+            #Name_box.set('')
+            #Age_box.set('')
+            #Phone_box.set('')
+            #Amount_box.set('')
+            #freq_box.set('')
             
             
 
