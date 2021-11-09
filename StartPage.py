@@ -1,6 +1,7 @@
 import SampleApp
 import tkinter as tk
-
+import MongoCommand
+import pymongo
 #=========================
 #Creating First Page======
 #=========================
@@ -66,7 +67,10 @@ class StartPage(tk.Frame):
         def connect_mongo():
          usr=my_user.get()
          pa=my_password.get()
-         #add mongoconnection
+         # mongoconnection
+         client = pymongo.MongoClient("mongodb+srv://"+usr+":"+pa+"@cluster0.ldhgj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+         db = client["g10"]
+         collection = db["cust_db"]
          my_password.set('')
          incorrect_Credientials_label['text']=''
          controller.show_frame('MenuPage')
