@@ -11,17 +11,17 @@ class Insert_detail_page(tk.Frame):
 
 
         heading_label = tk.Label(self,
-                                                     text='Customer-Management-System',
-                                                     font=('orbitron',45,'bold'),
-                                                     foreground='#ffffff',
-                                                     background='#3d3d5c')
+            text='Customer-Management-System',
+            font=('orbitron',45,'bold'),
+            foreground='#ffffff',
+            background='#3d3d5c')
         heading_label.pack(pady=25)
 
         Enter_Detail_label = tk.Label(self,
-                                                           text='Enter The Details You Want to Insert',
-                                                           font=('orbitron',23),
-                                                           fg='white',
-                                                           bg='#3d3d5c')
+            text='Enter The Details You Want to Insert',
+            font=('orbitron',23),
+            fg='white',
+            bg='#3d3d5c')
         Enter_Detail_label.pack()
 
         button_frame = tk.Frame(self,bg='#33334d')
@@ -29,24 +29,24 @@ class Insert_detail_page(tk.Frame):
 
             
         Name_Label = tk.Label(button_frame,
-                                                           text='Custmer\'s Name:',
-                                                           font=('orbitron',23),
-                                                           fg='white',
-                                                           bg='#3d3d5c')
+            text='Custmer\'s Name:',
+            font=('orbitron',23),
+            fg='white',
+            bg='#3d3d5c')
         Name_Label.grid(row=0,column=0,pady=5)
 
         Age_Label = tk.Label(button_frame,
-                                                           text='Customer\'s Age:',
-                                                           font=('orbitron',23),
-                                                           fg='white',
-                                                           bg='#3d3d5c')
+            text='Customer\'s Age:',
+            font=('orbitron',23),
+            fg='white',
+            bg='#3d3d5c')
         Age_Label.grid(row=1,column=0,pady=5)
 
         Phone_Label = tk.Label(button_frame,
-                                                           text='Customer\' Mobile Number: ',
-                                                           font=('orbitron',23),
-                                                           fg='white',
-                                                           bg='#3d3d5c')
+            text='Customer\' Mobile Number: ',
+            font=('orbitron',23),
+            fg='white',
+            bg='#3d3d5c')
         Phone_Label.grid(row=2,column=0,pady=5)
         
         Amount_Label = tk.Label(button_frame,
