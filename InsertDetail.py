@@ -2,7 +2,9 @@ import MongoCommand
 import tkinter as tk
 
 
+
 class Insert_detail_page(tk.Frame):
+    
     
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent,bg='#3d3d5c')
