@@ -67,6 +67,7 @@ class StartPage(tk.Frame):
         password_entry_box.bind('<FocusIn>',handle_focus_in)
 
         def connect_mongo():
+
             usr=my_user.get()
             pa=my_password.get()
             #add mongoconnection

@@ -2,6 +2,7 @@ import tkinter as tk
 import StartPage
 import MenuPage
 import InsertDetail
+import pymongo
 
 '''
 Here We are Creating a App that connects all pages.
