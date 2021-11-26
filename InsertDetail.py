@@ -1,4 +1,3 @@
-import SampleApp
 import MongoCommand
 import tkinter as tk
 
