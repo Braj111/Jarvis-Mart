@@ -1,5 +1,6 @@
 # imports
 import pymongo
+from StartPage import StartPage
 
 # class
 class cust_class(object):
@@ -10,45 +11,33 @@ class cust_class(object):
 
 # function prototypes
 def add_cust(name,age,phone,amount,freq):
-    client = pymongo.MongoClient("mongodb+srv://harsh92:harsh92@cluster0.ldhgj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-    db = client["g10"]
-    collection = db["cust_db"]
-
-    #name = input("Enter name: ")
-    #age = int(input("Enter age: "))
-    #phone = int(input("Enter phone no.: "))
-    #amount = int(input("Enter amount: "))
-    #freq = int(input("Enter frequency: "))
-    n = collection.estimated_document_count() #Task- Here we have to use some other logic to give the _id to the doc
     
-    new_cust = {"_id": n+1 ,"Name": name, "Age": age, "Phone": phone, "Amount": amount, "Frequency": freq, "Customer Score": amount/freq}
+    collection = StartPage.db.cust_db
+    n = collection.find({}, {"_id": 1}).sort("_id", -1).limit(1)
+    for i in n:
+        for i in i.values():
+            num = i
+    new_cust = {"Name": name, "Age": age, "Phone": phone, "Amount": amount, "Frequency": freq, "Customer Score": amount/freq}
     collection.insert_one(new_cust)
+
+    
 
 # remove function -  works fine but there's a clash with _id
 def remove_cust():
-    client = pymongo.MongoClient("mongodb+srv://harsh92:harsh92@cluster0.ldhgj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-    db = client["g10"]
-    collection = db["cust_db"]
-
+    collection = StartPage.db.cust_db
     cust_id = int(input("Enter Customer ID: "))
     collection.delete_one({"_id": cust_id})
 
 # FUNCTIONS TO FETCH DATA
 def fetch_by_id():
-    client = pymongo.MongoClient("mongodb+srv://harsh92:harsh92@cluster0.ldhgj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-    db = client["g10"]
-    collection = db["cust_db"]
-
+    collection = StartPage.db.cust_db
     cust_id = int(input("Enter Customer ID: "))
     cust = collection.find_one({"_id": cust_id})
     customer = cust_class(cust)
     print(customer.Name)
 
 def fetch_by_phone():
-    client = pymongo.MongoClient("mongodb+srv://harsh92:harsh92@cluster0.ldhgj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-    db = client["g10"]
-    collection = db["cust_db"]
-
+    collection = StartPage.db.cust_db
     phone = int(input("Enter Phone No.: "))
     cust = collection.find_one({"Phone": phone})
     customer = cust_class(cust)

@@ -1,5 +1,5 @@
-import SampleApp
 import tkinter as tk
+import pymongo
 
 #=========================
 #Creating First Page======
@@ -9,6 +9,9 @@ write all the tkinter commands inside init function, as using this whole frame w
 '''
 
 class StartPage(tk.Frame):
+    client = pymongo.MongoClient("mongodb+srv://harsh8833:harsh8833@cluster0.9hs91.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    db = client["g10"]
+    
     
 
     def __init__(self, parent, controller):
@@ -64,12 +67,12 @@ class StartPage(tk.Frame):
         password_entry_box.bind('<FocusIn>',handle_focus_in)
 
         def connect_mongo():
-         usr=my_user.get()
-         pa=my_password.get()
-         #add mongoconnection
-         my_password.set('')
-         incorrect_Credientials_label['text']=''
-         controller.show_frame('MenuPage')
+            usr=my_user.get()
+            pa=my_password.get()
+            #add mongoconnection
+            my_password.set('')
+            incorrect_Credientials_label['text']=''
+            controller.show_frame('MenuPage')
 
                   
         enter_button = tk.Button(self,
