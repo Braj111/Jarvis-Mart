@@ -23,7 +23,7 @@ def add_cust(name,age,phone,amount,freq):
 
 
 
-# remove function -  works fine but there's a clash with _id
+# remove function - 
 def remove_cust(cust_id):
     collection = StartPage.db.cust_db
     collection.delete_one({"_id": cust_id})
