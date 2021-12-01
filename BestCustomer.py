@@ -135,12 +135,13 @@ class best_customer_page(tk.Frame):
         bct.heading('total_shopping', text='Total shopping',anchor=CENTER)
         bct.pack(fill= X)
         
+        # table style
         style = ttk.Style()
         style.theme_use("default")
         style.map("Treeview")
-        style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 15), rowheight=40) # Modify the font of the body
-        #style.configure("Treeview.Heading", font=('Calibri', 13,'bold')) # Modify the font of the headings
-        #style.layout("Treeview", [('Treeview.treearea', {'sticky': 'nswe'})]) # Remove the borders
+        style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 15), rowheight=40)
+        style.configure("Treeview.Heading", font=('Calibri', 15,'bold')) 
+        style.layout("Treeview", [('Treeview.treearea', {'sticky': 'nswe'})])
 
 
 
