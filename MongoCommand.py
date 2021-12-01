@@ -19,6 +19,7 @@ def add_cust(name,age,phone,amount,freq):
     for i in n:
         for j in i.values():
             num = j
+    
     new_cust = {"_id": num+1, "Name": name, "Age": age, "Phone": phone, "Amount": amount, "Frequency": freq, "Customer Score": amount/freq}
     collection.insert_one(new_cust)
 

@@ -1,4 +1,6 @@
-from tkinter.constants import ANCHOR, CENTER, X
+from tkinter.constants import ANCHOR, CENTER,FLAT, RIGHT, X
+
+from pymongo.message import update 
 import MongoCommand
 import tkinter as tk
 from  tkinter import ttk
@@ -27,7 +29,7 @@ class best_customer_page(tk.Frame):
                                       font=('orbitron',23),
                                       fg='white',
                                       bg='#3d3d5c')
-        Enter_Detail_label.pack()
+        Enter_Detail_label.pack(fill=X)
 
         Star_frame = tk.Frame(self,bg='#33334d')
         Star_frame.pack(fill= X)
@@ -35,6 +37,9 @@ class best_customer_page(tk.Frame):
         table_frame = tk.Frame(self,bg='#33334d')
         table_frame.pack(fill= X)
         
+        update_frame = tk.Frame(self,bg='#33334d')
+        table_frame.pack(fill= X)
+
         button_frame = tk.Frame(self,bg='#33334d')
         button_frame.pack(fill='both',expand=True)
 
@@ -45,8 +50,8 @@ class best_customer_page(tk.Frame):
                               text='Custmer\'s Above:',
                               font=('orbitron',23),
                               fg='white',
-                              bg='#3d3d5c')
-        star_select.grid(row=0,column=0,pady=5)
+                              bg = '#33334d')
+        star_select.grid(row=0,column=0,pady=30)
 
         customer_type = tk.IntVar()
         #radio button function 
@@ -64,54 +69,57 @@ class best_customer_page(tk.Frame):
                                       bg='#33334d',
                                       foreground="yellow",
                                       command= lambda: fetchbystar(1),
-                                      relief='flat',
+                                      relief = FLAT,
                                       value= 1,
                                       variable=customer_type)                          
-        onestar.grid(row=0,column=1,padx=25)
+        onestar.grid(row=0,column=1)
         twostar = tk.Radiobutton(Star_frame,
-                                       text='⭐⭐',
+                                       text='⭐',
                                        indicatoron=0,
                                        font=('orbitron',23),
                                        bg='#33334d',
                                        foreground="yellow",
                                        command= lambda: fetchbystar(2),
-                                       relief='flat',
+                                       relief=FLAT,
                                        value= 2,
                                        variable=customer_type)                           
-        twostar.grid(row=0,column=2,padx=10)
+        twostar.grid(row=0,column=2)
 
         threestar = tk.Radiobutton(Star_frame,
-                                       text='⭐⭐⭐',
+                                       text='⭐',
                                        indicatoron=0,
                                        font=('orbitron',23),
                                        command= lambda: fetchbystar(3),
                                        bg='#33334d',
                                        foreground="yellow",
                                        value= 3,
+                                       relief=FLAT,
                                        variable=customer_type)                           
-        threestar.grid(row=0,column=3,padx=10)
+        threestar.grid(row=0,column=3)
 
         fourstar = tk.Radiobutton(Star_frame,
-                                       text='⭐⭐⭐⭐',
+                                       text='⭐',
                                        indicatoron=0,
                                        font=('orbitron',23),
                                        command= lambda: fetchbystar(4),
                                        bg='#33334d',
                                        foreground="yellow",
                                        value= 4,
+                                       relief=FLAT,
                                        variable=customer_type)                           
-        fourstar.grid(row=0,column=4,padx=10)
+        fourstar.grid(row=0,column=4)
 
         fivestar = tk.Radiobutton(Star_frame,
-                                       text='⭐⭐⭐⭐⭐',
+                                       text='⭐',
                                        indicatoron=0,
                                        font=('orbitron',23),
                                        command= lambda: fetchbystar(5),
                                        bg='#33334d',
                                        foreground="yellow",
                                        value= 5,
+                                       relief=FLAT,
                                        variable=customer_type)                           
-        fivestar.grid(row=0,column=5,padx=10)
+        fivestar.grid(row=0,column=5)
 
         ################################################################
         #   Table frame
@@ -143,7 +151,16 @@ class best_customer_page(tk.Frame):
         style.configure("Treeview.Heading", font=('Calibri', 15,'bold')) 
         style.layout("Treeview", [('Treeview.treearea', {'sticky': 'nswe'})])
 
+        ######################################################################
+        # Update Discount frame
+        ######################################################################
 
+        dis_label = tk.Label(update_frame,
+                                 text='Update Discount/offer for the selected customers',
+                                 font=('orbitron',15,'bold'),
+                                 foreground='#ffffff',
+                                 background='#3d3d5c')
+        dis_label.pack()
 
 
         Insert_button = tk.Button(button_frame,
