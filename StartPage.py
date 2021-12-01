@@ -23,41 +23,41 @@ class StartPage(tk.Frame):
         
 
         heading_label = tk.Label(self,
-                                                     text='Mongodb Connection',
-                                                     font=('orbitron',45,'bold'),
-                                                     foreground='#ffffff',
-                                                     background='#3d3d5c')
+                                text='Mongodb Connection',
+                                font=('orbitron',45,'bold'),
+                                foreground='#ffffff',
+                                background='#3d3d5c')
         heading_label.pack(pady=25)
 
         space_label = tk.Label(self,height=4,bg='#3d3d5c')
         space_label.pack()
 
         usr_label = tk.Label(self,
-                                                      text='Enter your Username',
-                                                      font=('orbitron',13),
-                                                      bg='#3d3d5c',
-                                                      fg='white')
+                            text='Enter your Username',
+                            font=('orbitron',13),
+                            bg='#3d3d5c',
+                            fg='white')
         usr_label.pack()
 
         my_user = tk.StringVar()
         User_entry_box = tk.Entry(self,
-                                                              textvariable=my_user,
-                                                              font=('orbitron',12),
-                                                              width=22)
+                                textvariable=my_user,
+                                font=('orbitron',12),
+                                width=22)
         User_entry_box.pack(ipady=7)
 
         password_label = tk.Label(self,
-                                                      text='Enter your password',
-                                                      font=('orbitron',13),
-                                                      bg='#3d3d5c',
-                                                      fg='white')
+                                text='Enter your password',
+                                font=('orbitron',13),
+                                bg='#3d3d5c',
+                                fg='white')
         password_label.pack(pady=10)
 
         my_password = tk.StringVar()
         password_entry_box = tk.Entry(self,
-                                                              textvariable=my_password,
-                                                              font=('orbitron',12),
-                                                              width=22)
+                                    textvariable=my_password,
+                                    font=('orbitron',12),
+                                    width=22)
         password_entry_box.focus_set()
         password_entry_box.pack(ipady=7)
 
@@ -77,20 +77,20 @@ class StartPage(tk.Frame):
 
                   
         enter_button = tk.Button(self,
-                                                     text='Connect',
-                                                     command=connect_mongo,
-                                                     relief='raised',
-                                                     borderwidth = 3,
-                                                     width=40,
-                                                     height=3)
+                                text='Connect',
+                                command=connect_mongo,
+                                relief='raised',
+                                borderwidth = 3,
+                                width=40,
+                                height=3)
         enter_button.pack(pady=10)
 
         incorrect_Credientials_label = tk.Label(self,
-                                                                        text='',
-                                                                        font=('orbitron',13),
-                                                                        fg='white',
-                                                                        bg='#33334d',
-                                                                        anchor='n')
+                                                text='',
+                                                font=('orbitron',13),
+                                                fg='white',
+                                                bg='#33334d',
+                                                anchor='n')
         incorrect_Credientials_label.pack(fill='both',expand=True)
 
         bottom_frame = tk.Frame(self,relief='raised',borderwidth=3)

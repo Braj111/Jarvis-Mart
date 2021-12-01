@@ -11,6 +11,7 @@ class cust_class(object):
 
 
 
+
 # function prototypes
 def add_cust(name,age,phone,amount,freq):
     collection = StartPage.db.cust_db
@@ -41,6 +42,15 @@ def fetch_by_phone(phone):
     cust = collection.find_one({"Phone": phone})
     customer = cust_class(cust)
 
+def fetch_by_star(star):
+    collection = StartPage.db.cust_db
+    cust = collection.find()
+    return cust
 
 
 
+# customer = fetch_by_star(3)
+
+# for i in customer:
+#     print(tuple(i.values()))
+    

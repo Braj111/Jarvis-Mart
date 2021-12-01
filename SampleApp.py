@@ -4,7 +4,8 @@ import MenuPage
 import InsertDetail
 import pymongo
 import ctypes
-
+import NewShopping
+import BestCustomer
 '''
 Here We are Creating a App that connects all pages.
 Logic ------> Create all pages and store them in a bucket then raise the frame on call.(similar to Staking, i use this as this makes the transition b/w pages fast.)
@@ -28,7 +29,7 @@ class SampleApp(tk.Tk):
 		self.frames = {}
 
 		#Add newly added pages here in for loop
-		for F in (StartPage.StartPage,MenuPage.MenuPage,InsertDetail.Insert_detail_page):
+		for F in (BestCustomer.best_customer_page ,NewShopping.New_shopping_page, StartPage.StartPage,MenuPage.MenuPage,InsertDetail.Insert_detail_page):
 			page_name = F.__name__
 			frame = F(parent=container, controller=self)
 			self.frames[page_name] = frame
@@ -37,7 +38,7 @@ class SampleApp(tk.Tk):
 	def show_frame(self, page_name):
 		frame = self.frames[page_name]
 		frame.tkraise()
-
+	
 		
 if __name__ == "__main__":
     app = SampleApp() #Calling the App class
