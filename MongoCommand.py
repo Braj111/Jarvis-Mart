@@ -14,7 +14,7 @@ class cust_class(object):
 
 # function prototypes
 def add_cust(name,age,phone,amount,freq):
-    collection = StartPage.db.cust_db
+    collection = StartPage.db.customer_db
     n = collection.find({}, {"_id": 1}).sort("_id", -1).limit(1)
     for i in n:
         for j in i.values():
@@ -26,25 +26,25 @@ def add_cust(name,age,phone,amount,freq):
 
 # remove function - 
 def remove_cust(cust_id):
-    collection = StartPage.db.cust_db
+    collection = StartPage.db.customer_db
     collection.delete_one({"_id": cust_id})
     
 
 
 # FUNCTIONS TO FETCH DATA
 def fetch_by_id(cust_id):
-    collection = StartPage.db.cust_db
+    collection = StartPage.db.customer_db
     cust = collection.find_one({"_id": cust_id})
     customer = cust_class(cust)
 
 def fetch_by_phone(phone):
-    collection = StartPage.db.cust_db
+    collection = StartPage.db.customer_db
     cust = collection.find_one({"Phone": phone})
     customer = cust_class(cust)
 
 def fetch_by_star(star):
-    collection = StartPage.db.cust_db
-    cust = collection.find()
+    collection = StartPage.db.customer_db
+    cust = collection.find({"star": star}).sort("_id", 1)
     return cust
 
 

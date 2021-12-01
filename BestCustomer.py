@@ -1,7 +1,8 @@
-from tkinter.constants import CENTER, X
+from tkinter.constants import ANCHOR, CENTER, X
 import MongoCommand
 import tkinter as tk
 from  tkinter import ttk
+
 
 
 class best_customer_page(tk.Frame):
@@ -47,49 +48,67 @@ class best_customer_page(tk.Frame):
                               bg='#3d3d5c')
         star_select.grid(row=0,column=0,pady=5)
 
-        customer_type = tk.IntVar(Star_frame, 1)
-        def onestar():
-            customer = MongoCommand.fetch_by_star(2)
+        customer_type = tk.IntVar()
+        #radio button function 
+        def fetchbystar(star):
+            customer = MongoCommand.fetch_by_star(star)
+            for row in bct.get_children():
+                bct.delete(row)
             for i in customer:
                 bct.insert(parent='',index = tk.END, values= tuple(i.values()))
+            
         onestar = tk.Radiobutton(Star_frame,
                                       text='⭐',
                                       indicatoron=0,
                                       font=('orbitron',23),
                                       bg='#33334d',
-                                      command=onestar,
+                                      foreground="yellow",
+                                      command= lambda: fetchbystar(1),
                                       relief='flat',
                                       value= 1,
                                       variable=customer_type)                          
         onestar.grid(row=0,column=1,padx=25)
         twostar = tk.Radiobutton(Star_frame,
                                        text='⭐⭐',
+                                       indicatoron=0,
                                        font=('orbitron',23),
                                        bg='#33334d',
+                                       foreground="yellow",
+                                       command= lambda: fetchbystar(2),
+                                       relief='flat',
                                        value= 2,
                                        variable=customer_type)                           
         twostar.grid(row=0,column=2,padx=10)
 
         threestar = tk.Radiobutton(Star_frame,
                                        text='⭐⭐⭐',
+                                       indicatoron=0,
                                        font=('orbitron',23),
+                                       command= lambda: fetchbystar(3),
                                        bg='#33334d',
+                                       foreground="yellow",
                                        value= 3,
                                        variable=customer_type)                           
         threestar.grid(row=0,column=3,padx=10)
 
         fourstar = tk.Radiobutton(Star_frame,
                                        text='⭐⭐⭐⭐',
+                                       indicatoron=0,
                                        font=('orbitron',23),
+                                       command= lambda: fetchbystar(4),
                                        bg='#33334d',
+                                       foreground="yellow",
                                        value= 4,
                                        variable=customer_type)                           
         fourstar.grid(row=0,column=4,padx=10)
 
         fivestar = tk.Radiobutton(Star_frame,
                                        text='⭐⭐⭐⭐⭐',
+                                       indicatoron=0,
                                        font=('orbitron',23),
+                                       command= lambda: fetchbystar(5),
                                        bg='#33334d',
+                                       foreground="yellow",
                                        value= 5,
                                        variable=customer_type)                           
         fivestar.grid(row=0,column=5,padx=10)
@@ -97,21 +116,33 @@ class best_customer_page(tk.Frame):
         ################################################################
         #   Table frame
         ################################################################
-        columns = ('_id','cust_name', 'cust_age', 'cust_phone','total_shopping','freq')
-        bct = ttk.Treeview(table_frame, columns= columns, show='headings',height=8)
+        columns = ('_id','cust_name', 'cust_age', 'cust_phone','freq','total_shopping')
 
+        bct = ttk.Treeview(table_frame, columns= columns, show='headings',height=8)
+       
+        bct.column('_id', anchor=CENTER)
+        bct.column('cust_name', anchor=CENTER)
+        bct.column('cust_age', anchor=CENTER)
+        bct.column('cust_phone', anchor=CENTER)
+        bct.column('freq', anchor=CENTER)
+        bct.column('total_shopping',anchor=CENTER)
 
         bct.heading('_id', text='Customer ID', anchor=CENTER)
         bct.heading('cust_name', text='Name',anchor=CENTER)
         bct.heading('cust_age', text='Age',anchor=CENTER)
         bct.heading('cust_phone', text='Phone',anchor=CENTER)
+        bct.heading('freq', text='No. of visits',anchor=CENTER)
         bct.heading('total_shopping', text='Total shopping',anchor=CENTER)
-        bct.heading('freq', text='Shopping Frequency',anchor=CENTER)
-        bct.pack()
+        bct.pack(fill= X)
         
         style = ttk.Style()
         style.theme_use("default")
         style.map("Treeview")
+        style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 15), rowheight=40) # Modify the font of the body
+        #style.configure("Treeview.Heading", font=('Calibri', 13,'bold')) # Modify the font of the headings
+        #style.layout("Treeview", [('Treeview.treearea', {'sticky': 'nswe'})]) # Remove the borders
+
+
 
 
         Insert_button = tk.Button(button_frame,
