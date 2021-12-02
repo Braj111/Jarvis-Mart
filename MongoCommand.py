@@ -48,6 +48,10 @@ def fetch_by_star(star):
     cust = collection.find({"star": star}).sort("_id", 1)
     return cust
 
+def fetch_discount(star):
+    collection = StartPage.db.Discount_db
+    st = collection.find_one({"star": star},{"discount": 1, "_id": 0})
+    return st['discount']
 
 
 # customer = fetch_by_star(3)

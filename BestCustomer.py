@@ -1,4 +1,4 @@
-from tkinter.constants import ANCHOR, CENTER,FLAT, RIGHT, X
+from tkinter.constants import ANCHOR, CENTER, END,FLAT, LEFT, RIGHT, X
 
 from pymongo.message import update 
 import MongoCommand
@@ -37,8 +37,11 @@ class best_customer_page(tk.Frame):
         table_frame = tk.Frame(self,bg='#33334d')
         table_frame.pack(fill= X)
         
-        update_frame = tk.Frame(self,bg='#33334d')
-        table_frame.pack(fill= X)
+        star_selector = tk.Frame(Star_frame,bg='#33334d')
+        star_selector.pack(side=LEFT)
+
+        update_frame = tk.Frame(Star_frame,bg='#33334d')
+        update_frame.pack(side=RIGHT)
 
         button_frame = tk.Frame(self,bg='#33334d')
         button_frame.pack(fill='both',expand=True)
@@ -46,7 +49,7 @@ class best_customer_page(tk.Frame):
         ################################################################
         #   Star selecting frame
         ################################################################
-        star_select = tk.Label(Star_frame,
+        star_select = tk.Label(star_selector,
                               text='Custmer\'s Above:',
                               font=('orbitron',23),
                               fg='white',
@@ -54,6 +57,7 @@ class best_customer_page(tk.Frame):
         star_select.grid(row=0,column=0,pady=30)
 
         customer_type = tk.IntVar()
+        
         #radio button function 
         def fetchbystar(star):
             customer = MongoCommand.fetch_by_star(star)
@@ -61,8 +65,10 @@ class best_customer_page(tk.Frame):
                 bct.delete(row)
             for i in customer:
                 bct.insert(parent='',index = tk.END, values= tuple(i.values()))
+            dis_entry.delete(0,END)
+            dis_entry.insert(0,)
             
-        onestar = tk.Radiobutton(Star_frame,
+        onestar = tk.Radiobutton(star_selector,
                                       text='⭐',
                                       indicatoron=0,
                                       font=('orbitron',23),
@@ -73,7 +79,7 @@ class best_customer_page(tk.Frame):
                                       value= 1,
                                       variable=customer_type)                          
         onestar.grid(row=0,column=1)
-        twostar = tk.Radiobutton(Star_frame,
+        twostar = tk.Radiobutton(star_selector,
                                        text='⭐',
                                        indicatoron=0,
                                        font=('orbitron',23),
@@ -85,7 +91,7 @@ class best_customer_page(tk.Frame):
                                        variable=customer_type)                           
         twostar.grid(row=0,column=2)
 
-        threestar = tk.Radiobutton(Star_frame,
+        threestar = tk.Radiobutton(star_selector,   
                                        text='⭐',
                                        indicatoron=0,
                                        font=('orbitron',23),
@@ -97,7 +103,7 @@ class best_customer_page(tk.Frame):
                                        variable=customer_type)                           
         threestar.grid(row=0,column=3)
 
-        fourstar = tk.Radiobutton(Star_frame,
+        fourstar = tk.Radiobutton(star_selector,
                                        text='⭐',
                                        indicatoron=0,
                                        font=('orbitron',23),
@@ -109,7 +115,7 @@ class best_customer_page(tk.Frame):
                                        variable=customer_type)                           
         fourstar.grid(row=0,column=4)
 
-        fivestar = tk.Radiobutton(Star_frame,
+        fivestar = tk.Radiobutton(star_selector,
                                        text='⭐',
                                        indicatoron=0,
                                        font=('orbitron',23),
@@ -156,21 +162,26 @@ class best_customer_page(tk.Frame):
         ######################################################################
 
         dis_label = tk.Label(update_frame,
-                                 text='Update Discount/offer for the selected customers',
+                                 text='Active Discount/offer',
                                  font=('orbitron',15,'bold'),
                                  foreground='#ffffff',
                                  background='#3d3d5c')
-        dis_label.pack()
+        dis_label.grid(column=0,row=0,pady=5)
 
-
-        Insert_button = tk.Button(button_frame,
-                                 text='Insert',font=('orbitron',20),
+        dis_entry = tk.Entry(update_frame,
+                             font=('orbitron',23),
+                             width=5,borderwidth=1)
+        dis_entry.grid(column=1,row=0,padx=5)
+        
+       
+        update_button = tk.Button(update_frame,
+                                 text='Update',font=('orbitron',20),
                                  
                                  relief='raised',fg='red',
                                  borderwidth = 1,
-                                 width=20,
+                                 width=10,
                                  )
-        Insert_button.grid(row=5,column=1,pady=5)
+        update_button.grid(column=2,row=0,padx=5)
 
         def menu():
             controller.show_frame('MenuPage')
@@ -180,7 +191,7 @@ class best_customer_page(tk.Frame):
                                 text='Menu',font=('orbitron',20),
                                 relief='raised',
                                 borderwidth=1,
-                                width=20,
+                                width=5,
                                 )
         menu_button.grid(row=6,column=1,pady=5)
 
