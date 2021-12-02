@@ -53,7 +53,11 @@ def fetch_discount(star):
     st = collection.find_one({"star": star},{"discount": 1, "_id": 0})
     return st['discount']
 
-
+def update_discount(star,dis):
+    collection = StartPage.db.Discount_db
+    collection.find_one_and_update({"star":star},{"$set":{"discount":dis}})
+    
+#update_discount(3, 10)  
 # customer = fetch_by_star(3)
 
 # for i in customer:

@@ -66,7 +66,7 @@ class best_customer_page(tk.Frame):
             for i in customer:
                 bct.insert(parent='',index = tk.END, values= tuple(i.values()))
             dis_entry.delete(0,END)
-            dis_entry.insert(0,)
+            dis_entry.insert(0,MongoCommand.fetch_discount(star))
             
         onestar = tk.Radiobutton(star_selector,
                                       text='⭐',
@@ -173,10 +173,15 @@ class best_customer_page(tk.Frame):
                              width=5,borderwidth=1)
         dis_entry.grid(column=1,row=0,padx=5)
         
+        # update function to update the active discount
+        def update():
+            discount = int(dis_entry.get())
+            MongoCommand.update_discount(customer_type.get(),discount)
+            
        
         update_button = tk.Button(update_frame,
                                  text='Update',font=('orbitron',20),
-                                 
+                                 command= update,
                                  relief='raised',fg='red',
                                  borderwidth = 1,
                                  width=10,
@@ -193,5 +198,5 @@ class best_customer_page(tk.Frame):
                                 borderwidth=1,
                                 width=5,
                                 )
-        menu_button.grid(row=6,column=1,pady=5)
+        menu_button.pack(side=RIGHT)
 
