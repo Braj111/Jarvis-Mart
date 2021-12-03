@@ -1,6 +1,5 @@
-from tkinter.constants import ANCHOR, CENTER, END,FLAT, LEFT, RIGHT, X
+from tkinter.constants import ANCHOR, BOTTOM, CENTER, END,FLAT, LEFT, RIGHT, TOP, X, Y
 
-from pymongo.message import update 
 import MongoCommand
 import tkinter as tk
 from  tkinter import ttk
@@ -24,15 +23,22 @@ class best_customer_page(tk.Frame):
                                  background='#3d3d5c')
         heading_label.pack(pady=25)
 
-        Enter_Detail_label = tk.Label(self,
+        best_customer_label = tk.Label(self,
                                       text='Best Customer',
                                       font=('orbitron',23),
                                       fg='white',
                                       bg='#3d3d5c')
-        Enter_Detail_label.pack(fill=X)
+        best_customer_label.pack(fill=X)
 
         Star_frame = tk.Frame(self,bg='#33334d')
         Star_frame.pack(fill= X)
+        star1 = "Nil"
+        selectedstar_label = tk.Label(self,
+                                      text='Showing '+star1+' star customers',
+                                      font=('orbitron',20),
+                                      fg='white',
+                                      bg='#3d3d5c')
+        selectedstar_label.pack(fill=X)
         
         table_frame = tk.Frame(self,bg='#33334d')
         table_frame.pack(fill= X)
@@ -43,8 +49,19 @@ class best_customer_page(tk.Frame):
         update_frame = tk.Frame(Star_frame,bg='#33334d')
         update_frame.pack(side=RIGHT)
 
-        button_frame = tk.Frame(self,bg='#33334d')
-        button_frame.pack(fill='both',expand=True)
+        automsg_label = tk.Label(self,
+                                      text='Send whatsapp message to the selected customers',
+                                      font=('orbitron',20),
+                                      fg='white',
+                                      bg='#3d3d5c')
+        automsg_label.pack(fill=X)
+
+        msgbox_frame = tk.Frame(self, bg='#33334d')
+        msgbox_frame.pack(fill= X)
+
+        button_frame = tk.Frame(self, bg='#33334d')
+        button_frame.pack(fill= X)
+        
 
         ################################################################
         #   Star selecting frame
@@ -57,7 +74,7 @@ class best_customer_page(tk.Frame):
         star_select.grid(row=0,column=0,pady=30)
 
         customer_type = tk.IntVar()
-        
+        star1 = str(customer_type.get())
         #radio button function 
         def fetchbystar(star):
             customer = MongoCommand.fetch_by_star(star)
@@ -162,10 +179,10 @@ class best_customer_page(tk.Frame):
         ######################################################################
 
         dis_label = tk.Label(update_frame,
-                                 text='Active Discount/offer',
-                                 font=('orbitron',15,'bold'),
+                                 text='Active Discount: ',
+                                 font=('orbitron',23,'bold'),
                                  foreground='#ffffff',
-                                 background='#3d3d5c')
+                                 background='#33334d')
         dis_label.grid(column=0,row=0,pady=5)
 
         dis_entry = tk.Entry(update_frame,
@@ -188,6 +205,13 @@ class best_customer_page(tk.Frame):
                                  )
         update_button.grid(column=2,row=0,padx=5)
 
+        msg_entry = tk.Entry(msgbox_frame,
+                             font=('orbitron',23),
+                             width=40,borderwidth=3,
+                             text = 'Enter message here'
+                             )
+        msg_entry.pack(fill=X, padx= 25)
+
         def menu():
             controller.show_frame('MenuPage')
             
@@ -198,5 +222,13 @@ class best_customer_page(tk.Frame):
                                 borderwidth=1,
                                 width=5,
                                 )
-        menu_button.pack(side=RIGHT)
+        menu_button.pack(side=RIGHT, padx= 10)
+        send_button = tk.Button(button_frame,
+                                command=menu,fg='green',
+                                text='send',font=('orbitron',20),
+                                relief='raised',
+                                borderwidth=1,
+                                width=5,
+                                )
+        send_button.pack()
 
