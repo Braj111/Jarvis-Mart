@@ -4,13 +4,9 @@ import time
 
 
 
-
-
-
-
 def send_msg(phone, msg):
     result = time.localtime()
-    pywhatkit.sendwhatmsg(phone, msg, result.tm_hour, result.tm_min+1)
+    pywhatkit.sendwhatmsg(phone, msg, result.tm_hour, result.tm_min+2)
 
-send_msg("+916200771718", "what")
+
 
