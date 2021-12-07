@@ -229,9 +229,11 @@ class best_customer_page(tk.Frame):
         ############################################################################
        
         def send():
-            message = msg_entry.get()
+            raw_message = msg_entry.get()
             data = MongoCommand.fetch_by_star(customer_type.get())
             for user in data:
+                message = raw_message.replace("@name", user['Name']).replace('@star', str(user['star']))
+                #print(message)
                 whatsappautomation(user['Phone'], message)
 
         send_button = tk.Button(button_frame,
