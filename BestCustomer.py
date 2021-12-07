@@ -3,7 +3,7 @@ from tkinter.constants import ANCHOR, BOTTOM, CENTER, END,FLAT, LEFT, RIGHT, TOP
 import MongoCommand
 import tkinter as tk
 from  tkinter import ttk
-
+from whatauto import whatsappautomation
 
 
 class best_customer_page(tk.Frame):
@@ -223,8 +223,19 @@ class best_customer_page(tk.Frame):
                                 width=5,
                                 )
         menu_button.pack(side=RIGHT, padx= 10)
+
+        ############################################################################
+        # Whatsapp automation to send message
+        ############################################################################
+       
+        def send():
+            message = msg_entry.get()
+            data = MongoCommand.fetch_by_star(customer_type.get())
+            for user in data:
+                whatsappautomation(user['Phone'], message)
+
         send_button = tk.Button(button_frame,
-                                command=menu,fg='green',
+                                command=send,fg='green',
                                 text='send',font=('orbitron',20),
                                 relief='raised',
                                 borderwidth=1,
