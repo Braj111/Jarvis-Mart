@@ -6,6 +6,8 @@ import pymongo
 import ctypes
 import NewShopping
 import BestCustomer
+import FindCustomer
+import DeleteCustomer
 '''
 Here We are Creating a App that connects all pages.
 Logic ------> Create all pages and store them in a bucket then raise the frame on call.(similar to Staking, i use this as this makes the transition b/w pages fast.)
@@ -18,7 +20,7 @@ we write all pages class in for loop so that we can create all pages when our Sa
 
 
 class SampleApp(tk.Tk):
-	ctypes.windll.shcore.SetProcessDpiAwareness(1)
+	#ctypes.windll.shcore.SetProcessDpiAwareness(1)
 	def __init__(self, *args, **kwargs):
 		tk.Tk.__init__(self, *args, **kwargs)
 		container = tk.Frame(self)
@@ -29,7 +31,7 @@ class SampleApp(tk.Tk):
 		self.frames = {}
 
 		#Add newly added pages here in for loop
-		for F in (BestCustomer.best_customer_page,NewShopping.New_shopping_page, StartPage.StartPage,MenuPage.MenuPage,InsertDetail.Insert_detail_page):
+		for F in (DeleteCustomer.delete_customer,FindCustomer.find_customer,BestCustomer.best_customer_page,NewShopping.New_shopping_page, StartPage.StartPage,MenuPage.MenuPage,InsertDetail.Insert_detail_page):
 			page_name = F.__name__
 			frame = F(parent=container, controller=self)
 			self.frames[page_name] = frame
