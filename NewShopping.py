@@ -25,12 +25,15 @@ class New_shopping_page(tk.Frame):
                                       fg='white',
                                       bg='#3d3d5c')
         Enter_Detail_label.pack()
-
         button_frame = tk.Frame(self,bg='#33334d')
         button_frame.pack(fill='both',expand=True)
 
+
+        button_frame_0 = tk.Frame(button_frame,bg='#33334d')
+        button_frame_0.grid(row=0,column=1)
+
         
-        Name_Label = tk.Label(button_frame,
+        Name_Label = tk.Label(button_frame_0,
                               text='Custmer\'s Type:',
                               font=('orbitron',23),
                               fg='white',
@@ -75,7 +78,7 @@ class New_shopping_page(tk.Frame):
                 widget.destroy()
 
             
-        new_customer = tk.Radiobutton(button_frame,
+        new_customer = tk.Radiobutton(button_frame_0,
                                        text='New Customer',
                                        font=('orbitron',23),
                                        fg='white',
@@ -100,7 +103,7 @@ class New_shopping_page(tk.Frame):
                            width=22,borderwidth=2)
             Age_box.grid(row=0,column=1)
             def fxn():
-                controller.show_frame('')
+                controller.show_frame('invoice_generator_page')
             Insert_button = tk.Button(button_frame_1,
                                  text='Find',font=('orbitron',20),
                                  command=fxn,
@@ -112,7 +115,7 @@ class New_shopping_page(tk.Frame):
             
             
 
-        existing_customer = tk.Radiobutton(button_frame,
+        existing_customer = tk.Radiobutton(button_frame_0,
                                       text='Existing Customer',
                                       font=('orbitron',23),
                                       fg='white',
