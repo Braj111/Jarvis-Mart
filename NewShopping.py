@@ -104,6 +104,8 @@ class New_shopping_page(tk.Frame):
             Age_box.grid(row=0,column=1)
             def fxn():
                 controller.show_frame('invoice_generator_page')
+                for widget in button_frame_1.winfo_children():
+                    widget.destroy()
             Insert_button = tk.Button(button_frame_1,
                                  text='Find',font=('orbitron',20),
                                  command=fxn,
