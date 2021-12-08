@@ -1,4 +1,4 @@
-from tkinter.constants import BOTH, CENTER, LEFT, RIGHT, TOP, X
+from tkinter.constants import BOTH, BOTTOM, CENTER, LEFT, RIGHT, TOP, X
 import MongoCommand
 import tkinter as tk
 from tkinter import ttk
@@ -34,7 +34,7 @@ class invoice_generator_page(tk.Frame):
 
 
         button_frame_0 = tk.Frame(button_frame,bg='#33334d')
-        button_frame_0.pack(fill='both',expand=True)
+        button_frame_0.pack(fill='both',expand=False)
         columns = ('s_no','item', 'qty', 'price','total')
 
         bct = ttk.Treeview(button_frame_0, columns= columns, show='headings',height=8)
@@ -77,7 +77,7 @@ class invoice_generator_page(tk.Frame):
         Name_Label.grid(row=0,column=1,pady=5)
         
         button_frame_1 = tk.Frame(button_frame,bg='#33334d')
-        button_frame_1.pack(fill='both',expand=True)
+        button_frame_1.pack(fill='both',expand=False)
 
         button_frame_2 = tk.Frame(button_frame_1,bg='#33334d')
         button_frame_2.pack(side=TOP,fill=BOTH)
@@ -154,7 +154,7 @@ class invoice_generator_page(tk.Frame):
         freq_box = tk.Entry(button_frame_2,                                                             
                             font=('orbitron',23),
                             textvariable=total,
-                            width=5,borderwidth=2)
+                            width=8,borderwidth=2)
         freq_box.grid(row=1,column=4,pady=5)
 
         def insert_tree():
@@ -175,11 +175,33 @@ class invoice_generator_page(tk.Frame):
             total.set('')
             
 
-        Insert_button = tk.Button(button_frame_2,
+        Insert_button = tk.Button(button_frame_1,
                                  text='Insert',font=('orbitron',20),
                                  command=insert_tree,
                                  relief='raised',fg='red',
                                  borderwidth = 1,
                                  width=5,
                                  )
-        Insert_button.grid(row=1,column=5,pady=5)
+        Insert_button.pack(side=LEFT)
+        def menu():
+            controller.show_frame('MenuPage')
+            
+        menu_button = tk.Button(button_frame_1,
+                                                    command=menu,fg='green',
+                                                    text='Menu',font=('orbitron',20),
+                                                    relief='raised',
+                                                    borderwidth=1,
+                                                    width=5,
+                                                    )
+        menu_button.pack(side=LEFT)
+
+        menu_button = tk.Button(button_frame,
+                                                    command=menu,fg='red',
+                                                    text='Generate',font=('orbitron',20),
+                                                    relief='raised',
+                                                    borderwidth=2,
+                                                    width=20,
+                                                    height=5
+                                                    )
+        menu_button.pack(side=BOTTOM)
+
