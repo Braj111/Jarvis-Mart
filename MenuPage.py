@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter.constants import BOTTOM
 
 #=========================
 #Creating Menu Page======
@@ -47,20 +48,20 @@ class MenuPage(tk.Frame):
                                     borderwidth=3,
                                     width=50,
                                     height=3)
-        withdraw_button.grid(row=0,column=0,pady=5,padx=625)
+        withdraw_button.pack()
 
         def New_shopping_page():
             controller.show_frame('New_shopping_page')
             
         Search_Student_Detail_button = tk.Button(button_frame,
-                                                text='New Shopping',
+                                                text='Shopping',
                                                 command= New_shopping_page,
                                                 font=('orbitron',12),
                                                 relief='raised',
                                                 borderwidth=3,
                                                 width=50,
                                                 height=3)
-        Search_Student_Detail_button.grid(row=1,column=0,pady=5,padx=625)
+        Search_Student_Detail_button.pack()
         
 
         def best_customer_page():
@@ -74,10 +75,10 @@ class MenuPage(tk.Frame):
                                     borderwidth=3,
                                     width=50,
                                     height=3)
-        Update_button.grid(row=2,column=0,pady=5,padx=625)
+        Update_button.pack()
 
         def Delete_Entry():
-            controller.show_frame('Delete_entry')
+            controller.show_frame('delete_customer')
             
         delete_student_button = tk.Button(button_frame,
                                             text='Delete Customer details',font=('orbitron',12),
@@ -86,11 +87,11 @@ class MenuPage(tk.Frame):
                                             borderwidth=3,
                                             width=50,
                                             height=3)
-        delete_student_button.grid(row=3,column=0,pady=5,padx=625)
+        delete_student_button.pack()
 
 
         def Display_All_detail():
-            controller.show_frame('Display_Detail')
+            controller.show_frame('find_customer')
         
         display_detail_button = tk.Button(button_frame,
                                             text='Find Customer',font=('orbitron',12),
@@ -99,7 +100,7 @@ class MenuPage(tk.Frame):
                                             borderwidth=3,
                                             width=50,
                                             height=3)
-        display_detail_button.grid(row=4,column=0,pady=5,padx=625)
+        display_detail_button.pack()
 
         def exit():
             controller.show_frame('StartPage')
@@ -110,5 +111,5 @@ class MenuPage(tk.Frame):
                                 borderwidth=3,
                                 width=50,
                                 height=3)
-        exit_button.grid(row=5,column=0,pady=5,padx=625)
+        exit_button.pack()
 
