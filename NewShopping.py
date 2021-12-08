@@ -1,3 +1,4 @@
+from tkinter.constants import TOP
 import MongoCommand
 import tkinter as tk
 
@@ -19,7 +20,7 @@ class New_shopping_page(tk.Frame):
         heading_label.pack(pady=25)
 
         Enter_Detail_label = tk.Label(self,
-                                      text='New Shopping',
+                                      text='Shopping',
                                       font=('orbitron',23),
                                       fg='white',
                                       bg='#3d3d5c')
@@ -36,6 +37,7 @@ class New_shopping_page(tk.Frame):
                               bg='#3d3d5c')
         Name_Label.grid(row=0,column=0,pady=5)
 
+        '''
         Age_Label = tk.Label(button_frame,
                              text='Customer\'s Age:',
                              font=('orbitron',23),
@@ -63,26 +65,67 @@ class New_shopping_page(tk.Frame):
                               fg='white',
                               bg='#3d3d5c')
         freq_Label.grid(row=4,column=0,pady=5)
-
+        '''
+        button_frame_1 = tk.Frame(button_frame,bg='#33334d')
+        button_frame_1.grid(row=1,column=1)
         customer_type = tk.IntVar(button_frame, 1)
+        def trans():
+            controller.show_frame('Insert_detail_page')
+            for widget in button_frame_1.winfo_children():
+                widget.destroy()
+
+            
         new_customer = tk.Radiobutton(button_frame,
                                        text='New Customer',
                                        font=('orbitron',23),
                                        fg='white',
                                        bg='#3d3d5c',
                                        value= 0,
+                                       width=20,
+                                       command=trans,
                                        variable=customer_type)                           
         new_customer.grid(row=0,column=1,pady=5)
+        def const():
+            #add whatever you need in this screen
+            #button_frame_1 = tk.Frame(self,bg='#33334d')
+            #button_frame_1.pack(fill='both',expand=True)
+            Name_Label = tk.Label(button_frame_1,
+                              text='Customer\'s ID',
+                              font=('orbitron',23),
+                              fg='white',
+                              bg='#3d3d5c')
+            Name_Label.grid(row=0,column=0)
+            Age_box = tk.Entry(button_frame_1,                                       
+                           font=('orbitron',23),
+                           width=22,borderwidth=2)
+            Age_box.grid(row=0,column=1)
+            def fxn():
+                controller.show_frame('')
+            Insert_button = tk.Button(button_frame_1,
+                                 text='Find',font=('orbitron',20),
+                                 command=fxn,
+                                 relief='raised',fg='red',
+                                 borderwidth = 1,
+                                 width=10,
+                                 )
+            Insert_button.grid(row=0,column=2)
+            
+            
 
         existing_customer = tk.Radiobutton(button_frame,
                                       text='Existing Customer',
                                       font=('orbitron',23),
                                       fg='white',
                                       bg='#3d3d5c',
+                                      command=const,
                                       value= 1,
+                                      width=20,
                                       variable=customer_type)                          
         existing_customer.grid(row=0,column=2,pady=5)
 
+        
+        
+        '''
         # Name_box = tk.Entry(button_frame,                                                      
         #                     font=('orbitron',23),
         #                     width=22,borderwidth=2)
@@ -152,4 +195,4 @@ class New_shopping_page(tk.Frame):
                                 width=20,
                                 )
         menu_button.grid(row=6,column=1,pady=5)
-
+        '''
