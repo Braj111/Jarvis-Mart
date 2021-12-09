@@ -2,7 +2,6 @@ import tkinter as tk
 import StartPage
 import MenuPage
 import InsertDetail
-import pymongo
 import ctypes
 import NewShopping
 import BestCustomer
@@ -21,7 +20,7 @@ we write all pages class in for loop so that we can create all pages when our Sa
 
 
 class SampleApp(tk.Tk):
-	#ctypes.windll.shcore.SetProcessDpiAwareness(1)
+	ctypes.windll.shcore.SetProcessDpiAwareness(1)
 	def __init__(self, *args, **kwargs):
 		tk.Tk.__init__(self, *args, **kwargs)
 		container = tk.Frame(self)

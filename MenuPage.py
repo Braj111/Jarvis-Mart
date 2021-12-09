@@ -37,24 +37,24 @@ class MenuPage(tk.Frame):
         button_frame = tk.Frame(self,bg='#33334d')
         button_frame.pack(fill='both',expand=True)
 
-        def insert_detail_page():
-            controller.show_frame('Insert_detail_page')
+        # def insert_detail_page():
+        #     controller.show_frame('Insert_detail_page')
             
-        withdraw_button = tk.Button(button_frame,
-                                    text='Insert Customer Detail',
-                                    command=insert_detail_page,
-                                    relief='raised',
-                                    font=('orbitron',12),
-                                    borderwidth=3,
-                                    width=50,
-                                    height=3)
-        withdraw_button.pack()
+        # withdraw_button = tk.Button(button_frame,
+        #                             text='Insert Customer Detail',
+        #                             command=insert_detail_page,
+        #                             relief='raised',
+        #                             font=('orbitron',12),
+        #                             borderwidth=3,
+        #                             width=50,
+        #                             height=3)
+        # withdraw_button.pack()
 
         def New_shopping_page():
             controller.show_frame('New_shopping_page')
             
         Search_Student_Detail_button = tk.Button(button_frame,
-                                                text='Shopping',
+                                                text='New Shopping',
                                                 command= New_shopping_page,
                                                 font=('orbitron',12),
                                                 relief='raised',
