@@ -2,7 +2,6 @@ import tkinter as tk
 import StartPage
 import MenuPage
 import InsertDetail
-import pymongo
 import ctypes
 import NewShopping
 import BestCustomer
