@@ -1,4 +1,4 @@
-from tkinter.constants import CENTER, LEFT, RIGHT, TOP, X, Y
+from tkinter.constants import CENTER, END, LEFT, RIGHT, TOP, X, Y
 import MongoCommand
 import tkinter as tk
 from tkinter import ttk
@@ -134,31 +134,68 @@ class New_shopping_page(tk.Frame):
             bg='#000000')
         total_Label.grid(row=0,column=3,sticky="ew")
 
-        languages = ('Python', 'JavaScript', 'Java',
-                        'Swift', 'GoLang', 'C#', 'C++', 'Scala')
+        languages = {'Python':10, 'JavaScript':20, 'Java':30,
+                        'Swift':40, 'GoLang':50, 'C#':60, 'C++':70, 'Scala':80}
         
-        option_var = tk.StringVar(self)
+        itemscb = []
+        priceeb = []
+        qtysb = []
+        totaleb = []
         # items = tk.StringVar()
         # items.set(OptionList[0]) #defult
 
-        def option_changed(self, *args):
-            #self.output_label['text'] = f'You selected: {self.option_var.get()}'
-            print('click')
+        def GT():
+            print("In GT")
+            total = 0
+            total_box.delete(0, END)
+            GT_box.delete(0, END)
+            for price in totaleb:
+                if len(price.get()) != 0:
+                    total += int(price.get())
+                    print(total)
+            total_box.insert(0, total)
+            Gtotal = total-(10)
+            GT_box.insert(0, Gtotal)
+
+        def qty_changed(row):
+            totaleb[row].delete(0,END)
+            total = int(priceeb[row].get()) * int(qtysb[row].get())
+            totaleb[row].insert(0,total)
+            GT()
+        
+        def option_changed(event, row):
+            priceeb[row].delete(0,END)
+            priceeb[row].insert(0, languages[itemscb[row].get()])
+            qty_changed(row)
+            
+
         for row in range(8):
             for column in range(4):
                 if column == 0:
-                    self.e = ttk.OptionMenu(
-                                                invoice_heading,
-                                                option_var,
-                                                languages[0],
-                                                *languages,
-                                                command=option_changed)
-                    #command=option_changed)
-                    #self.e.config(font=('orbitron',15),width=10)
-                    self.e.grid(row=row+1,column=column, sticky= 'w')
-                else:  
-                    self.e = tk.Entry(invoice_heading, width=18, justify= 'center', font=('orbitron',18))
-                    self.e.grid(row=row+1,column=column)
+                    cb = tk.StringVar()
+                    cb = ttk.Combobox(invoice_heading, textvariable=cb)
+                    cb['values'] = ('Python', 'JavaScript', 'Java','Swift', 'GoLang', 'C#', 'C++', 'Scala')
+                    cb['state'] = 'readonly'
+                    cb.grid(row=row+1,column=column)
+                    cb.bind('<<ComboboxSelected>>', lambda event, x = row: option_changed(event,x))
+                    itemscb.append(cb)
+                elif column == 1:  
+                    pb = tk.Entry(invoice_heading, width=18, justify= 'center', font=('orbitron',18))
+                    pb.grid(row=row+1,column=column)
+                    priceeb.append(pb)
+                elif column == 2:
+                    qbvar = tk.StringVar(value=1)  
+                    qb = ttk.Spinbox(invoice_heading, from_=0, to= 10,
+                                     textvariable= qbvar,
+                                     command= lambda x = row: qty_changed(x))
+                    qb.grid(row=row+1,column=column)
+                    qtysb.append(qb)
+                else:
+                    tb = tk.Entry(invoice_heading, width=18, justify= 'center', font=('orbitron',18))
+                    tb.grid(row=row+1,column=column)
+                    totaleb.append(tb)
+
+        
 
         total_foot_Label = tk.Label(invoice_heading,
             text='Total',
@@ -167,6 +204,9 @@ class New_shopping_page(tk.Frame):
             bg='#000000')
         total_foot_Label.grid(row=10,column=2,sticky="ew")
 
+        total_box = tk.Entry(invoice_heading, width=18, justify= 'center', font=('orbitron',18))
+        total_box.grid(row=10,column=3)
+
         discount_foot_Label = tk.Label(invoice_heading,
             text='Discount',
             font=('orbitron',20),
@@ -174,9 +214,15 @@ class New_shopping_page(tk.Frame):
             bg='#000000')
         discount_foot_Label.grid(row=11,column=2,sticky="ew")
 
+        discount_box = tk.Entry(invoice_heading, width=18, justify= 'center', font=('orbitron',18))
+        discount_box.grid(row=11,column=3)
+
         GT_foot_Label = tk.Label(invoice_heading,
             text='Grand Total',
             font=('orbitron',20),
             fg='white',
             bg='#000000')
         GT_foot_Label.grid(row=12,column=2,sticky="ew")
+    
+        GT_box = tk.Entry(invoice_heading, width=18, justify= 'center', font=('orbitron',18))
+        GT_box.grid(row=12,column=3)
