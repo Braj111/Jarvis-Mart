@@ -1,4 +1,5 @@
-from tkinter.constants import CENTER, END, LEFT, RIGHT, TOP, X, Y
+from tkinter.constants import BOTTOM, CENTER, END, LEFT, RIGHT, TOP, X, Y
+from tkinter.font import BOLD
 import MongoCommand
 import tkinter as tk
 from tkinter import ttk
@@ -64,7 +65,7 @@ class New_shopping_page(tk.Frame):
             font=('orbitron',23),
             fg='white',
             bg='#3d3d5c')
-        Name_Label.grid(row=0,column=0,pady=5,padx= 5)
+        Name_Label.grid(row=0,column=0,pady=5,padx=5)
 
         Name_box = tk.Entry(detail_frame1,
                                                               
@@ -78,22 +79,22 @@ class New_shopping_page(tk.Frame):
             font=('orbitron',23),
             fg='white',
             bg='#3d3d5c')
-        Phone_label.grid(row=0,column=2,pady=5, padx= 10)
+        Phone_label.grid(row=0,column=2,pady=5, padx= 5)
 
 
         Phone_box = tk.Entry(detail_frame1,
                                                               
-                                                              font=('orbitron',23),
-                                                              width=12,borderwidth=2,
-                                                              justify= 'center')
-        Phone_box.grid(row=0,column=3,pady=5,padx=10)
+                            font=('orbitron',23),
+                            width=12,borderwidth=2,
+                            justify= 'center')
+        Phone_box.grid(row=0,column=3,pady=5)
 
         Age_Label = tk.Label(detail_frame2,
             text='Age:',
             font=('orbitron',23),
             fg='white',
             bg='#3d3d5c')
-        Age_Label.grid(row=1,column=0,pady=5, padx= 5)
+        Age_Label.grid(row=0,column=0,pady=5, padx= 5)
 
 
         Age_box = tk.Entry(detail_frame2,
@@ -101,7 +102,22 @@ class New_shopping_page(tk.Frame):
                                                               font=('orbitron',23),
                                                               width=5,borderwidth=2,
                                                               justify= 'center')
-        Age_box.grid(row=1,column=1,pady=5,padx=10)
+        Age_box.grid(row=0,column=1,pady=5,padx=10)
+
+        Star_Label = tk.Label(detail_frame2,
+            text='Star:',
+            font=('orbitron',23),
+            fg='white',
+            bg='#3d3d5c')
+        Star_Label.grid(row=0,column=2,pady=5, padx= 5)
+
+        star_box = tk.Entry(detail_frame2,
+                                                              
+                                                              font=('orbitron',23),
+                                                              width=5,borderwidth=2,
+                                                              justify= 'center')
+        star_box.grid(row=0,column=3,pady=5,padx=10)
+
 
 
         item_Label = tk.Label(invoice_heading,
@@ -152,12 +168,17 @@ class New_shopping_page(tk.Frame):
                     total += int(price.get())
                     print(total)
             total_box.insert(0, total)
-            Gtotal = total-(10)
-            GT_box.insert(0, Gtotal)
+            discount = 0
+            if len(discount_box.get()) != 0:
+                discount = int(discount_box.get().replace('-','').replace('%',''))
+                discount  = (discount/100) * total
+            Gtotal = total - discount
+            GT_box.insert(0, '₹'+str(Gtotal))
         
         def qty_changed(row):
             totaleb[row].delete(0,END)
             total = int(priceeb[row].get()) * int(qtysb[row].get())
+           
             totaleb[row].insert(0,total)
             GT()
         
@@ -265,11 +286,37 @@ class New_shopping_page(tk.Frame):
             Name_box.insert(0, customer.Name)
             Age_box.delete(0, END)
             Age_box.insert(0, customer.Age)
+            Phone_box.delete(0, END)
+            Phone_box.insert(0, customer.Phone)
+            discount_box.delete(0, END)
+            discount_text = '-'+str(MongoCommand.fetch_discount(customer.star))+'%'
+            discount_box.insert(0,discount_text)
+            star_box.delete(0, END)
+            star_box.insert(0, customer.star)
+            GT()
+            
+
         validate_button = tk.Button(button_frame,
                                  text='Validate',font=('orbitron',20),
                                  command= validate,
-                                 relief='raised',fg='red',
+                                 relief='raised',fg='Green',
                                  borderwidth = 1,
                                  width=10,
                                  )
-        validate_button.pack(anchor= CENTER, pady=10)        
+        validate_button.pack(anchor= CENTER, pady=10)  
+
+        generate_cid_button = tk.Button(button_frame,
+                                 text='Generate Customer Id',font=('orbitron',20),
+                                 command= validate,
+                                 relief='raised',fg='Green',
+                                 borderwidth = 1,
+                                 )
+        generate_cid_button.pack(anchor= CENTER, pady=10)
+
+        generate_invoice_button = tk.Button(button_frame,
+                                 text='Generate Invoice',font=('orbitron',23,BOLD),
+                                 command= validate,
+                                 relief='raised',fg='Green',
+                                 borderwidth = 1,
+                                 )
+        generate_invoice_button.pack(side= BOTTOM,anchor= CENTER, pady=20)       
