@@ -37,12 +37,14 @@ def fetch_by_id(cust_id):
     collection = StartPage.db.customer_db
     cust = collection.find_one({"_id": cust_id})
     customer = cust_class(cust)
+    return customer
 
 def fetch_by_phone(phone):
     collection = StartPage.db.customer_db
     cust = collection.find_one({"Phone": phone})
     customer = cust_class(cust)
-
+    return customer
+    
 def fetch_by_star(star):
     collection = StartPage.db.customer_db
     cust = collection.find({"star": star}).sort("_id", 1)

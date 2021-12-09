@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 import StartPage
 import MenuPage
 import InsertDetail
@@ -27,6 +28,8 @@ class SampleApp(tk.Tk):
 		container.pack(side="top", fill="both" ,expand=True)
 		container.grid_rowconfigure(0, weight =1)
 		container.grid_columnconfigure(0, weight=1)
+
+		
 		
 		self.frames = {}
 

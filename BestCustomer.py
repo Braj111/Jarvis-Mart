@@ -147,6 +147,13 @@ class best_customer_page(tk.Frame):
         ################################################################
         #   Table frame
         ################################################################
+        self.style = ttk.Style(self)
+        self.style.theme_use("xpnative")
+        self.style.map("Treeview")
+        self.style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 15), rowheight=40)
+        self.style.configure("Treeview.Heading", font=('Calibri', 15,'bold'), background='black', foreground='dark blue') 
+        self.style.layout("Treeview", [('Treeview.treearea', {'sticky': 'nswe'})])
+
         columns = ('_id','cust_name', 'cust_age', 'cust_phone','freq','total_shopping')
 
         bct = ttk.Treeview(table_frame, columns= columns, show='headings',height=8)
@@ -164,15 +171,11 @@ class best_customer_page(tk.Frame):
         bct.heading('cust_phone', text='Phone',anchor=CENTER)
         bct.heading('freq', text='No. of visits',anchor=CENTER)
         bct.heading('total_shopping', text='Total shopping',anchor=CENTER)
+    
         bct.pack(fill= X)
         
         # table style
-        style = ttk.Style()
-        style.theme_use("default")
-        style.map("Treeview")
-        style.configure("Treeview", highlightthickness=0, bd=0, font=('Calibri', 15), rowheight=40)
-        style.configure("Treeview.Heading", font=('Calibri', 15,'bold')) 
-        style.layout("Treeview", [('Treeview.treearea', {'sticky': 'nswe'})])
+        
 
         ######################################################################
         # Update Discount frame
