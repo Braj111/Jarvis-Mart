@@ -305,17 +305,32 @@ class New_shopping_page(tk.Frame):
                                  )
         validate_button.pack(anchor= CENTER, pady=10)  
 
+        def gencid():
+            amt = 0
+            if len(GT_box.get()) != 0:
+                amt = int(GT_box.get().replace('₹',''))
+            cid = MongoCommand.add_cust(name=Name_box.get(),
+                                  age= int(Age_box.get()),
+                                  phone= Phone_box.get(),
+                                  amount= amt,
+                                  freq=1)
+            cid_box.delete(0, END)
+            cid_box.insert(0,cid)
+
         generate_cid_button = tk.Button(button_frame,
                                  text='Generate Customer Id',font=('orbitron',20),
-                                 command= validate,
+                                 command= gencid,
                                  relief='raised',fg='Green',
                                  borderwidth = 1,
                                  )
         generate_cid_button.pack(anchor= CENTER, pady=10)
 
+        def generate_bill():
+            MongoCommand.star_update(int(cid_box.get()))
+
         generate_invoice_button = tk.Button(button_frame,
                                  text='Generate Invoice',font=('orbitron',23,BOLD),
-                                 command= validate,
+                                 command= generate_bill,
                                  relief='raised',fg='Green',
                                  borderwidth = 1,
                                  )
