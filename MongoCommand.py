@@ -99,3 +99,12 @@ def invoice_creation(id, billamount, items, discount):
     invoice = {'_id': num+1, 'cid': id, 'invamount': billamount,'discount': discount, 'items': items, 'invdate':dtn, }
     collection.insert_one(invoice)
 
+def fetch_prod():
+    collection = StartPage.db.prod_db
+    prod = dict()
+    fetprods = collection.find({},{'_id':0})
+    for i in fetprods:
+        prod[i['product']] = i['price']
+    print(prod)
+
+fetch_prod()

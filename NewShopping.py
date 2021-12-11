@@ -148,8 +148,8 @@ class New_shopping_page(tk.Frame):
             bg='#000000')
         total_Label.grid(row=0,column=3,sticky="ew")
 
-        languages = {'Python':10, 'JavaScript':20, 'Java':30,
-                        'Swift':40, 'GoLang':50, 'C#':60, 'C++':70, 'Scala':80}
+        # Fetching products from prod_db 
+        products = MongoCommand.fetch_prod()
         
         # invoice widgits list
         itemscb = []
@@ -184,7 +184,7 @@ class New_shopping_page(tk.Frame):
         
         def option_changed(event, row):
             priceeb[row].delete(0,END)
-            priceeb[row].insert(0, languages[itemscb[row].get()])
+            priceeb[row].insert(0, products[itemscb[row].get()])
             qty_changed(row)
         
         # ttk style theme choosing
