@@ -1,6 +1,6 @@
 # imports
 from StartPage import StartPage
-
+import datetime
 
 # class
 class cust_class(object):
@@ -13,14 +13,14 @@ class cust_class(object):
 
 
 # function prototypes
-def add_cust(name,age,phone,amount,freq):
+def add_cust(name,age,phone,amount,freq,star):
     collection = StartPage.db.customer_db
     n = collection.find({}, {"_id": 1}).sort("_id", -1).limit(1)
     for i in n:
         for j in i.values():
             num = j
     
-    new_cust = {"_id": num+1, "Name": name, "Age": age, "Phone": phone, "Amount": amount, "Frequency": freq, "Customer Score": amount/freq}
+    new_cust = {"_id": num+1, "Name": name, "Age": age, "Phone": phone, "Amount": amount, "Frequency": freq, "Customer Score": amount/freq, "star": star}
     collection.insert_one(new_cust)
     return num+1
 
@@ -60,28 +60,42 @@ def update_discount(star,dis):
     collection = StartPage.db.Discount_db
     collection.find_one_and_update({"star":star},{"$set":{"discount":dis}})
 
-def update_cusotmer(id, star):
-    collection = StartPage.db.customer_db
-    collection.find_one_and_update({"_id":id},{"$set":{"star":star}})
 
+# this funciton updates the star by customer id
 def star_update(cust_id):
+    collection = StartPage.db.customer_db
     customer = fetch_by_id(cust_id)
-    avg = customer.Amount /  customer.Avg
-
+    avg = customer.Avg
     if avg  < 1000:
-        update_cusotmer(cust_id, 1)
+        collection.find_one_and_update({"_id":cust_id},{"$set":{"star":1}})
     elif avg >= 1000 and avg < 2000:
-        update_cusotmer(cust_id, 2)
+        collection.find_one_and_update({"_id":cust_id},{"$set":{"star":2}})
     elif avg >= 2000 and avg < 3000:
-        update_cusotmer(cust_id, 3)
+        collection.find_one_and_update({"_id":cust_id},{"$set":{"star":3}})
     elif avg >= 3000 and avg < 4000:
-        update_cusotmer(cust_id, 4)
+        collection.find_one_and_update({"_id":cust_id},{"$set":{"star":4}})
     elif avg >= 4000:
-        update_cusotmer(cust_id, 5)       
+        collection.find_one_and_update({"_id":cust_id},{"$set":{"star":5}})       
 
-#update_discount(3, 10)  
-# customer = fetch_by_star(3)
 
-# for i in customer:
-#     print(tuple(i.values()))
     
+def update_cusotmer(id, billamount):
+    collection = StartPage.db.customer_db
+    customer = fetch_by_id(id)
+    collection.find_one_and_update({"_id":id},
+                                    {"$inc":{"Amount": billamount,'Frequency': 1},
+                                     "$set":{"Avg": round(customer.Amount/customer.Frequency)}})
+    star_update(id)
+
+
+def invoice_creation(id, billamount, items, discount):
+    collection = StartPage.db.invoice_db
+    n = collection.find({}, {"_id": 1}).sort("_id", -1).limit(1)
+    for i in n:
+        for j in i.values():
+            num = j
+    dtn = datetime.datetime.now()
+    dtn = dtn.strftime("%d/%m/%Y %H:%M:%S")
+    invoice = {'_id': num+1, 'cid': id, 'invamount': billamount,'discount': discount, 'items': items, 'invdate':dtn, }
+    collection.insert_one(invoice)
+
