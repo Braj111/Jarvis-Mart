@@ -3,7 +3,7 @@ from tkinter.font import BOLD
 import MongoCommand
 import tkinter as tk
 from tkinter import ttk
-
+from whatauto import whatsappautomation
 
 
 class New_shopping_page(tk.Frame):
@@ -308,7 +308,7 @@ class New_shopping_page(tk.Frame):
         def gencid():
             amt = 0
             if len(GT_box.get()) != 0:
-                amt = int(GT_box.get().replace('₹',''))
+                amt = float(GT_box.get().replace('₹',''))
             cid = MongoCommand.add_cust(name=Name_box.get(),
                                   age= int(Age_box.get()),
                                   phone= Phone_box.get(),
@@ -326,8 +326,14 @@ class New_shopping_page(tk.Frame):
         generate_cid_button.pack(anchor= CENTER, pady=10)
 
         def generate_bill():
-            MongoCommand.star_update(int(cid_box.get()))
-
+            cid = int(cid_box.get())
+            billamount = float(GT_box.get().replace('₹', ''))
+            bamt = GT_box.get()
+            MongoCommand.update_cusotmer(cid, billamount)
+            customer = MongoCommand.fetch_by_id(cid)
+            message = "Hello "+customer.Name+", Thanks for visiting us! You have just compleated shopping of "+bamt+" on Invoice No. xyz. Keep shopping to increase your stars and get exciting discount in future"
+            whatsappautomation(customer.Phone, message)
+       
         generate_invoice_button = tk.Button(button_frame,
                                  text='Generate Invoice',font=('orbitron',23,BOLD),
                                  command= generate_bill,
@@ -335,3 +341,15 @@ class New_shopping_page(tk.Frame):
                                  borderwidth = 1,
                                  )
         generate_invoice_button.pack(side= BOTTOM,anchor= CENTER, pady=20)       
+
+        def menu():
+            controller.show_frame('MenuPage')
+            
+        menu_button = tk.Button(button_frame,
+                                command=menu,fg='green',
+                                text='Menu',font=('orbitron',20),
+                                relief='raised',
+                                borderwidth=1,
+                                width=5,
+                                )
+        menu_button.pack(side = BOTTOM,anchor= CENTER, pady=20)
