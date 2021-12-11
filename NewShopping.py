@@ -10,40 +10,57 @@ class New_shopping_page(tk.Frame):
     
     
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent,bg='#3d3d5c')
+        tk.Frame.__init__(self, parent,bg='#1E5128')
         self.controller = controller
 
 
         heading_label = tk.Label(self,
                                  text='Customer-Management-System',
                                  font=('orbitron',45,'bold'),
-                                 foreground='#ffffff',
-                                 background='#3d3d5c')
+                                 foreground='#D8E9A8',
+                                 background='#1E5128')
         heading_label.pack(pady=25)
 
-        Enter_Detail_label = tk.Label(self,
-                                      text='Shopping',
-                                      font=('orbitron',23),
-                                      fg='white',
-                                      bg='#3d3d5c')
-        Enter_Detail_label.pack()
+        shopping_frame = tk.Frame(self, bg='#1E5128')
+        shopping_frame.pack(fill=X,expand=True)
+       
+        invoice_number_label = tk.Label(shopping_frame,
+                                        text='Invoice No.',
+                                        font=('orbitron',20),
+                                        fg='white',
+                                        bg='#1E5128')
+        invoice_number_label.pack(side=LEFT)
+        invoicenumber = MongoCommand.get_invoice_number()
+        invo_no = tk.Label(shopping_frame,
+                                text=invoicenumber,
+                                font=('orbitron',20),
+                                fg='white',
+                                bg='#1E5128')
+        invo_no.pack(side=LEFT)
 
+        shopping_label = tk.Label(shopping_frame,
+                                      text='New Shopping',
+                                      font=('orbitron',23, BOLD),
+                                      fg='white',
+                                      bg='#1E5128')
+        shopping_label.pack(side = TOP)
+    
         ##################################################################################
         # Frames
         ##################################################################################
 
         invoice_frame = tk.Frame(self,
-                                 bg='#ff0000')
+                                 bg='#1E5128')
         invoice_frame.pack(fill= Y, side= LEFT, padx = 15)
 
         detail_frame = tk.Frame(invoice_frame,
-                                 bg='#ff0f00')
+                                 bg='#1E5128')
         detail_frame.pack(fill= X, padx=20)
 
-        detail_frame1 = tk.Frame(detail_frame, bg='#ff0f00')
+        detail_frame1 = tk.Frame(detail_frame, bg='#1E5128')
         detail_frame1.pack(fill = X)
 
-        detail_frame2 = tk.Frame(detail_frame, bg='#ff0f00')
+        detail_frame2 = tk.Frame(detail_frame, bg='#1E5128')
         detail_frame2.pack(fill = X)
 
 
@@ -54,47 +71,47 @@ class New_shopping_page(tk.Frame):
                                       text='Invoice',
                                       font=('orbitron',23),
                                       fg='white',
-                                      bg='#3d3d5c')
+                                      bg='#1E5128')
         invoice_label.pack(fill=X, pady= 5)
         
-        invoice_heading = tk.Frame(invoice_frame, bg='#ff0f00')
+        invoice_heading = tk.Frame(invoice_frame, bg='#1E5128')
         invoice_heading.pack(fill = X)       
 
         Name_Label = tk.Label(detail_frame1,
             text='Custmer\'s Name:',
             font=('orbitron',23),
             fg='white',
-            bg='#3d3d5c')
-        Name_Label.grid(row=0,column=0,pady=5,padx=5)
+            bg='#1E5128')
+        Name_Label.pack(fill= X,side=LEFT,pady=5,padx=5)
 
         Name_box = tk.Entry(detail_frame1,
                                                               
                                                               font=('orbitron',23),
                                                               width=15,borderwidth=2,
                                                               justify='center')
-        Name_box.grid(row=0,column=1,pady=5)
+        Name_box.pack(fill =X,side = RIGHT,padx=5,pady=5, expand= True)
 
-        Phone_label = tk.Label(detail_frame1,
+        Phone_label = tk.Label(detail_frame2,
             text='Phone:',
             font=('orbitron',23),
             fg='white',
-            bg='#3d3d5c')
-        Phone_label.grid(row=0,column=2,pady=5, padx= 5)
+            bg='#1E5128')
+        Phone_label.grid(row=0,column=0,pady=5, padx= 5)
 
 
-        Phone_box = tk.Entry(detail_frame1,
+        Phone_box = tk.Entry(detail_frame2,
                                                               
                             font=('orbitron',23),
-                            width=12,borderwidth=2,
+                            width=15,borderwidth=2,
                             justify= 'center')
-        Phone_box.grid(row=0,column=3,pady=5)
+        Phone_box.grid(row=0,column=1,pady=5,padx=5)
 
         Age_Label = tk.Label(detail_frame2,
             text='Age:',
             font=('orbitron',23),
             fg='white',
-            bg='#3d3d5c')
-        Age_Label.grid(row=0,column=0,pady=5, padx= 5)
+            bg='#1E5128')
+        Age_Label.grid(row=0,column=2,pady=5, padx= 5)
 
 
         Age_box = tk.Entry(detail_frame2,
@@ -102,21 +119,21 @@ class New_shopping_page(tk.Frame):
                                                               font=('orbitron',23),
                                                               width=5,borderwidth=2,
                                                               justify= 'center')
-        Age_box.grid(row=0,column=1,pady=5,padx=10)
+        Age_box.grid(row=0,column=3,pady=5,padx=5)
 
         Star_Label = tk.Label(detail_frame2,
             text='Star:',
             font=('orbitron',23),
             fg='white',
-            bg='#3d3d5c')
-        Star_Label.grid(row=0,column=2,pady=5, padx= 5)
+            bg='#1E5128')
+        Star_Label.grid(row=0,column=4,pady=5, padx= 5)
 
         star_box = tk.Entry(detail_frame2,
                                                               
                                                               font=('orbitron',23),
                                                               width=5,borderwidth=2,
                                                               justify= 'center')
-        star_box.grid(row=0,column=3,pady=5,padx=10)
+        star_box.grid(row=0,column=5,pady=5,padx=5)
 
 
 
@@ -267,7 +284,7 @@ class New_shopping_page(tk.Frame):
                             text='Customer Id',
                             font=('orbitron',23),
                             fg='white',
-                            bg='#3d3d5c')
+                            bg='#1E5128')
         cid_Label.pack(fill=X, padx=40, pady=20)
 
         cid_box = tk.Entry(button_frame,
@@ -355,8 +372,10 @@ class New_shopping_page(tk.Frame):
                     items.append(i.get())
             discount = discount_box.get().replace('%', '')
             invno = MongoCommand.invoice_creation(cid, billamount,items, discount)
-            #message = "Hello "+customer.Name+", Thanks for visiting us! You have just compleated shopping of "+bamt+" on Invoice No. xyz. Keep shopping to increase your stars and get exciting discount in future"
-            #whatsappautomation(customer.Phone, message)
+            message = "Hello "+customer.Name+", Thanks for visiting us! You have just compleated shopping of "+bamt+" on Invoice No. xyz. Keep shopping to increase your stars and get exciting discount in future"
+            whatsappautomation(customer.Phone, message)
+            newinvoicenumber = MongoCommand.get_invoice_number()
+            invo_no.configure(text=newinvoicenumber)
             clear_stuffs()
        
         generate_invoice_button = tk.Button(button_frame,

@@ -87,17 +87,23 @@ def update_cusotmer(id, billamount):
                                      "$set":{"Avg": round(customer.Amount/customer.Frequency)}})
     star_update(id)
 
-
-def invoice_creation(id, billamount, items, discount):
+def get_invoice_number():
     collection = StartPage.db.invoice_db
     n = collection.find({}, {"_id": 1}).sort("_id", -1).limit(1)
     for i in n:
         for j in i.values():
             num = j
+    return num+1
+
+
+def invoice_creation(id, billamount, items, discount):
+    collection = StartPage.db.invoice_db
     dtn = datetime.datetime.now()
     dtn = dtn.strftime("%d/%m/%Y %H:%M:%S")
-    invoice = {'_id': num+1, 'cid': id, 'invamount': billamount,'discount': discount, 'items': items, 'invdate':dtn, }
+    invoice = {'_id': get_invoice_number(), 'cid': id, 'invamount': billamount,'discount': discount, 'items': items, 'invdate':dtn, }
     collection.insert_one(invoice)
+
+
 
 def fetch_prod():
     collection = StartPage.db.prod_db
