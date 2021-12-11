@@ -150,7 +150,7 @@ class New_shopping_page(tk.Frame):
 
         # Fetching products from prod_db 
         products = MongoCommand.fetch_prod()
-        
+        prod_name = tuple(products.keys())
         # invoice widgits list
         itemscb = []
         priceeb = []
@@ -159,14 +159,12 @@ class New_shopping_page(tk.Frame):
 
         # Grand Total function
         def GT():
-            print("In GT")
             total = 0
             total_box.delete(0, END)
             GT_box.delete(0, END)
             for price in totaleb:
                 if len(price.get()) != 0:
                     total += int(price.get())
-                    print(total)
             total_box.insert(0, total)
             discount = 0
             if len(discount_box.get()) != 0:
@@ -199,7 +197,7 @@ class New_shopping_page(tk.Frame):
                 if column == 0:
                     cb = tk.StringVar()
                     cb = ttk.Combobox(invoice_heading, textvariable=cb)
-                    cb['values'] = ('Python', 'JavaScript', 'Java','Swift', 'GoLang', 'C#', 'C++', 'Scala')
+                    cb['values'] = prod_name
                     cb['state'] = 'readonly'
                     cb.config(justify= CENTER, font=('orbitron',16), width= 17)
                     cb.grid(row=row+1,column=column)
@@ -324,22 +322,48 @@ class New_shopping_page(tk.Frame):
                                  borderwidth = 1,
                                  )
         generate_cid_button.pack(anchor= CENTER, pady=10)
+        
+        def clear_stuffs():
+            for i in itemscb:
+                i.set('')
+            for i in priceeb:
+                i.delete(0, END)
+            for i in qtysb:
+                i.delete(0, END)
+            for i in totaleb:
+                i.delete(0, END)
+            Name_box.delete(0, END)
+            Age_box.delete(0, END)
+            Phone_box.delete(0, END)
+            star_box.delete(0, END)
+            GT_box.delete(0, END)
+            total_box.delete(0, END)
+            discount_box.delete(0, END)
+            cid_box.delete(0, END)
 
+
+        # Generate bill function triggers whatsapp automation and clear entry boxes, push invoice in database
         def generate_bill():
             cid = int(cid_box.get())
             billamount = float(GT_box.get().replace('₹', ''))
             bamt = GT_box.get()
             MongoCommand.update_cusotmer(cid, billamount)
             customer = MongoCommand.fetch_by_id(cid)
-            message = "Hello "+customer.Name+", Thanks for visiting us! You have just compleated shopping of "+bamt+" on Invoice No. xyz. Keep shopping to increase your stars and get exciting discount in future"
-            whatsappautomation(customer.Phone, message)
+            items = list()
+            for i in itemscb:
+                if len(i.get()) != 0:
+                    items.append(i.get())
+            discount = discount_box.get().replace('%', '')
+            invno = MongoCommand.invoice_creation(cid, billamount,items, discount)
+            #message = "Hello "+customer.Name+", Thanks for visiting us! You have just compleated shopping of "+bamt+" on Invoice No. xyz. Keep shopping to increase your stars and get exciting discount in future"
+            #whatsappautomation(customer.Phone, message)
+            clear_stuffs()
        
         generate_invoice_button = tk.Button(button_frame,
                                  text='Generate Invoice',font=('orbitron',23,BOLD),
                                  command= generate_bill,
                                  relief='raised',fg='Green',
-                                 borderwidth = 1,
-                                 )
+                                 borderwidth = 1)
         generate_invoice_button.pack(side= BOTTOM,anchor= CENTER, pady=20)       
 
         def menu():
@@ -350,6 +374,5 @@ class New_shopping_page(tk.Frame):
                                 text='Menu',font=('orbitron',20),
                                 relief='raised',
                                 borderwidth=1,
-                                width=5,
-                                )
+                                width=5)
         menu_button.pack(side = BOTTOM,anchor= CENTER, pady=20)

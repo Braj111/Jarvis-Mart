@@ -105,6 +105,5 @@ def fetch_prod():
     fetprods = collection.find({},{'_id':0})
     for i in fetprods:
         prod[i['product']] = i['price']
-    print(prod)
+    return prod
 
-fetch_prod()
