@@ -1,9 +1,9 @@
 from tkinter.constants import ANCHOR, BOTH, BOTTOM, CENTER, END,FLAT, LEFT, RIGHT, TOP, X, Y
 from tkinter.font import BOLD
-
 import MongoCommand
 import tkinter as tk
 from  tkinter import Toplevel, ttk
+import tkinter.messagebox
 from whatauto import whatsappautomation
 
 
@@ -83,67 +83,68 @@ class best_customer_page(tk.Frame):
             for i in customer:
                 bct.insert(parent='',index = tk.END, values= tuple(i.values()))
             dis_entry.delete(0,END)
-            dis_entry.insert(0,MongoCommand.fetch_discount(star))
+            dis = str(MongoCommand.fetch_discount(star))+'%'
+            dis_entry.insert(0, dis)
             selectedstar_label.configure(text="Showing "+str(star)+" star customers")
             
         onestar = tk.Radiobutton(star_selector,
                                       text='★',
                                       indicatoron=0,
                                       font=('orbitron',23),
-                                      bg='#3C4A3E',
+                                      bg='#0B4619',
                                       foreground="#FFCC1D",
                                       command= lambda: fetchbystar(1),
                                       relief = FLAT,
                                       value= 1,
                                       variable=customer_type)                          
-        onestar.grid(row=0,column=1, ipadx = 2)
+        onestar.grid(row=0,column=1, ipadx = 10)
         twostar = tk.Radiobutton(star_selector,
                                        text='★',
                                        indicatoron=0,
                                        font=('orbitron',23),
-                                       bg='#3C4A3E',
+                                       bg='#0B4619',
                                        foreground="#FFCC1D",
                                        command= lambda: fetchbystar(2),
                                        relief=FLAT,
                                        value= 2,
                                        variable=customer_type)                           
-        twostar.grid(row=0,column=2, ipadx = 2)
+        twostar.grid(row=0,column=2, ipadx = 10)
 
         threestar = tk.Radiobutton(star_selector,   
                                        text='★',
                                        indicatoron=0,
                                        font=('orbitron',23),
                                        command= lambda: fetchbystar(3),
-                                       bg='#3C4A3E',
+                                       bg='#0B4619',
                                        foreground="#FFCC1D",
                                        value= 3,
                                        relief=FLAT,
                                        variable=customer_type)                           
-        threestar.grid(row=0,column=3, ipadx = 2)
+        threestar.grid(row=0,column=3, ipadx = 10)
 
         fourstar = tk.Radiobutton(star_selector,
                                        text='★',
                                        indicatoron=0,
                                        font=('orbitron',23),
                                        command= lambda: fetchbystar(4),
-                                       bg='#3C4A3E',
+                                       bg='#0B4619',
                                        fg="#FFCC1D",
                                        value= 4,
                                        relief=FLAT,
                                        variable=customer_type)                           
-        fourstar.grid(row=0,column=4, ipadx = 2)
+        fourstar.grid(row=0,column=4, ipadx = 10)
 
         fivestar = tk.Radiobutton(star_selector,
                                        text='★',
                                        indicatoron=0,
                                        font=('orbitron',23),
                                        command= lambda: fetchbystar(5),
-                                       bg='#3C4A3E',
+                                       bg='#0B4619',
                                        foreground="#FFCC1D",
                                        value= 5,
                                        relief=FLAT,
                                        variable=customer_type)                           
-        fivestar.grid(row=0,column=5, ipadx = 2)
+        fivestar.grid(row=0,column=5, ipadx = 10)
 
         ################################################################
         #   Table frame
@@ -183,7 +184,7 @@ class best_customer_page(tk.Frame):
         ######################################################################
 
         dis_label = tk.Label(update_frame,
-                                 text='Active Discount: ',
+                                 text='Active Discount:',
                                  font=('orbitron',23),
                                  foreground='#ffffff',
                                  background='#116530')
@@ -198,9 +199,9 @@ class best_customer_page(tk.Frame):
         
         # update function to update the active discount
         def update():
-            discount = int(dis_entry.get())
+            discount = int(dis_entry.get().replace('%',''))
             MongoCommand.update_discount(customer_type.get(),discount)
-            
+            tkinter.messagebox.showinfo('Update', 'Discount Updated.')
        
         update_button = tk.Button(update_frame,
                                  text='Update',font=('orbitron',21,BOLD),
@@ -244,6 +245,8 @@ class best_customer_page(tk.Frame):
                 message = raw_message.replace("@name", user['Name']).replace('@star', str(user['star']))
                 #print(message)
                 whatsappautomation(user['Phone'], message)
+            msg_entry.delete(0,END)
+            tkinter.messagebox.showinfo('Sent', 'Message sent to the selected customers')
 
         send_button = tk.Button(button_frame,
                                 command=send,fg='#3C4A3E',

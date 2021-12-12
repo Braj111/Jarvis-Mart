@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter.constants import BOTTOM
+from tkinter.font import BOLD
 
 #=========================
 #Creating Menu Page======
@@ -9,32 +10,32 @@ from tkinter.constants import BOTTOM
 class MenuPage(tk.Frame):
 
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent,bg='#3d3d5c')
+        tk.Frame.__init__(self, parent,bg='#0B4619')
         self.controller = controller
    
         heading_label = tk.Label(self,
                                  text='Customer-Management-System',
                                  font=('orbitron',45,'bold'),
-                                 foreground='#ffffff',
-                                 background='#3d3d5c')
+                                 foreground='#FFCC1D',
+                                 background='#0B4619')
         heading_label.pack(pady=25)
 
         main_menu_label = tk.Label(self,
                                    text='Main Menu',
-                                   font=('orbitron',20),
-                                   fg='white',
-                                   bg='#3d3d5c')
+                                   font=('orbitron',20,BOLD),
+                                   fg='#B7C304',
+                                   bg='#0B4619')
         main_menu_label.pack()
 
         selection_label = tk.Label(self,
                                    text='Please make a selection',
                                    font=('orbitron',18),
                                    fg='white',
-                                   bg='#3d3d5c',
+                                   bg='#0B4619',
                                    anchor='w')
         selection_label.pack()
 
-        button_frame = tk.Frame(self,bg='#33334d')
+        button_frame = tk.Frame(self,bg='#116530')
         button_frame.pack(fill='both',expand=True)
 
         # def insert_detail_page():
@@ -43,9 +44,9 @@ class MenuPage(tk.Frame):
         # withdraw_button = tk.Button(button_frame,
         #                             text='Insert Customer Detail',
         #                             command=insert_detail_page,
-        #                             relief='raised',
+        #                             relief='flat',
         #                             font=('orbitron',12),
-        #                             borderwidth=3,
+        #                          
         #                             width=50,
         #                             height=3)
         # withdraw_button.pack()
@@ -56,12 +57,14 @@ class MenuPage(tk.Frame):
         Search_Student_Detail_button = tk.Button(button_frame,
                                                 text='New Shopping',
                                                 command= New_shopping_page,
-                                                font=('orbitron',12),
-                                                relief='raised',
-                                                borderwidth=3,
+                                                font=('orbitron',15,BOLD),
+                                                fg='#FFCC1D',
+                                                bg = '#3C4A3E',
+                                                relief='flat',
+                                    
                                                 width=50,
                                                 height=3)
-        Search_Student_Detail_button.pack()
+        Search_Student_Detail_button.pack(pady=1)
         
 
         def best_customer_page():
@@ -70,46 +73,57 @@ class MenuPage(tk.Frame):
         Update_button = tk.Button(button_frame,
                                     text='Best Customer',
                                     command=best_customer_page,
-                                    font=('orbitron',12),
-                                    relief='raised',
-                                    borderwidth=3,
+                                    font=('orbitron',15,BOLD),
+                                    fg='#FFCC1D',
+                                    bg = '#3C4A3E',
+                                    relief='flat',
+                        
                                     width=50,
                                     height=3)
-        Update_button.pack()
+        Update_button.pack(pady=1)
 
         def Delete_Entry():
             controller.show_frame('delete_customer')
             
         delete_student_button = tk.Button(button_frame,
-                                            text='Delete Customer details',font=('orbitron',12),
+                                            text='Delete Customer details',
                                             command=Delete_Entry,
-                                            relief='raised',
-                                            borderwidth=3,
+                                            font=('orbitron',15,BOLD),
+                                            fg='#FFCC1D',
+                                            bg = '#3C4A3E',
+                                            relief='flat',
+                                
                                             width=50,
                                             height=3)
-        delete_student_button.pack()
+        delete_student_button.pack(pady=1)
 
 
         def Display_All_detail():
             controller.show_frame('find_customer')
         
         display_detail_button = tk.Button(button_frame,
-                                            text='Find Customer',font=('orbitron',12),
+                                            text='Find Customer',
                                             command=Display_All_detail,
-                                            relief='raised',
-                                            borderwidth=3,
+                                            font=('orbitron',15,BOLD),
+                                            fg='#FFCC1D',
+                                            bg = '#3C4A3E',
+                                            relief='flat',
+                                
                                             width=50,
                                             height=3)
-        display_detail_button.pack()
+        display_detail_button.pack(pady=1)
 
         def exit():
-            controller.show_frame('StartPage')
+            parent.quit()
         exit_button = tk.Button(button_frame,
-                                text='Exit',font=('orbitron',12),
+                                text='Exit',
                                 command=exit,
-                                relief='raised',
-                                borderwidth=3,
+                                font=('orbitron',15,BOLD),
+                                fg='Red',
+                                bg = '#3C4A3E',
+                                relief='flat',
+                    
                                 width=50,
                                 height=3)
-        exit_button.pack()
+        exit_button.pack(pady=1)
 

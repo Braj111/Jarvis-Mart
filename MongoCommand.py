@@ -13,14 +13,14 @@ class cust_class(object):
 
 
 # function prototypes
-def add_cust(name,age,phone,amount,freq):
+def add_cust(name,age,phone):
     collection = StartPage.db.customer_db
     n = collection.find({}, {"_id": 1}).sort("_id", -1).limit(1)
     for i in n:
         for j in i.values():
             num = j
     
-    new_cust = {"_id": num+1, "Name": name, "Age": age, "Phone": phone, "Amount": amount, "Frequency": freq, "Avg": 0, "star": 1}
+    new_cust = {"_id": num+1, "Name": name, "Age": age, "Phone": phone, "Amount": 0, "Frequency": 0, "Avg": 0, "star": 1}
     collection.insert_one(new_cust)
     return num+1
 
@@ -81,10 +81,10 @@ def star_update(cust_id):
     
 def update_cusotmer(id, billamount):
     collection = StartPage.db.customer_db
+    
+    collection.find_one_and_update({"_id":id},{"$inc":{"Amount": billamount,'Frequency': 1}})
     customer = fetch_by_id(id)
-    collection.find_one_and_update({"_id":id},
-                                    {"$inc":{"Amount": billamount,'Frequency': 1},
-                                     "$set":{"Avg": round(customer.Amount/customer.Frequency)}})
+    collection.find_one_and_update({"_id":id}, {"$set":{"Avg": round(customer.Amount/customer.Frequency)}})
     star_update(id)
 
 def get_invoice_number():

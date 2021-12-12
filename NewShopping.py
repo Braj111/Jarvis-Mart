@@ -336,14 +336,9 @@ class New_shopping_page(tk.Frame):
         validate_button.pack(anchor= CENTER, pady=10)  
 
         def gencid():
-            amt = 0
-            if len(GT_box.get()) != 0:
-                amt = float(GT_box.get().replace('₹',''))
             cid = MongoCommand.add_cust(name=Name_box.get(),
                                   age= int(Age_box.get()),
-                                  phone= Phone_box.get(),
-                                  amount= amt,
-                                  freq=1)
+                                  phone= Phone_box.get())
             cid_box.delete(0, END)
             cid_box.insert(0,cid)
 
