@@ -10,39 +10,39 @@ class New_shopping_page(tk.Frame):
     
     
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent,bg='#1E5128')
+        tk.Frame.__init__(self, parent,bg='#0B4619')
         self.controller = controller
 
 
         heading_label = tk.Label(self,
                                  text='Customer-Management-System',
                                  font=('orbitron',45,'bold'),
-                                 foreground='#D8E9A8',
-                                 background='#1E5128')
+                                 foreground='#E8E8CC',
+                                 background='#0B4619')
         heading_label.pack(pady=25)
 
-        shopping_frame = tk.Frame(self, bg='#1E5128')
+        shopping_frame = tk.Frame(self, bg='#0B4619')
         shopping_frame.pack(fill=X,expand=True)
        
         invoice_number_label = tk.Label(shopping_frame,
                                         text='Invoice No.',
                                         font=('orbitron',20),
                                         fg='white',
-                                        bg='#1E5128')
+                                        bg='#0B4619')
         invoice_number_label.pack(side=LEFT)
         invoicenumber = MongoCommand.get_invoice_number()
         invo_no = tk.Label(shopping_frame,
                                 text=invoicenumber,
                                 font=('orbitron',20),
                                 fg='white',
-                                bg='#1E5128')
+                                bg='#0B4619')
         invo_no.pack(side=LEFT)
 
         shopping_label = tk.Label(shopping_frame,
                                       text='New Shopping',
                                       font=('orbitron',23, BOLD),
                                       fg='white',
-                                      bg='#1E5128')
+                                      bg='#0B4619')
         shopping_label.pack(side = TOP)
     
         ##################################################################################
@@ -50,17 +50,17 @@ class New_shopping_page(tk.Frame):
         ##################################################################################
 
         invoice_frame = tk.Frame(self,
-                                 bg='#1E5128')
+                                 bg='#116530')
         invoice_frame.pack(fill= Y, side= LEFT, padx = 15)
 
         detail_frame = tk.Frame(invoice_frame,
-                                 bg='#1E5128')
+                                 bg='#116530')
         detail_frame.pack(fill= X, padx=20)
 
-        detail_frame1 = tk.Frame(detail_frame, bg='#1E5128')
+        detail_frame1 = tk.Frame(detail_frame, bg='#116530')
         detail_frame1.pack(fill = X)
 
-        detail_frame2 = tk.Frame(detail_frame, bg='#1E5128')
+        detail_frame2 = tk.Frame(detail_frame, bg='#116530')
         detail_frame2.pack(fill = X)
 
 
@@ -71,31 +71,32 @@ class New_shopping_page(tk.Frame):
                                       text='Invoice',
                                       font=('orbitron',23),
                                       fg='white',
-                                      bg='#1E5128')
-        invoice_label.pack(fill=X, pady= 5)
+                                      bg='#0B4619')
+        invoice_label.pack(fill=X)
         
-        invoice_heading = tk.Frame(invoice_frame, bg='#1E5128')
+        invoice_heading = tk.Frame(invoice_frame, bg='#116530')
         invoice_heading.pack(fill = X)       
 
         Name_Label = tk.Label(detail_frame1,
             text='Custmer\'s Name:',
             font=('orbitron',23),
             fg='white',
-            bg='#1E5128')
+            bg='#116530')
         Name_Label.pack(fill= X,side=LEFT,pady=5,padx=5)
 
         Name_box = tk.Entry(detail_frame1,
                                                               
                                                               font=('orbitron',23),
                                                               width=15,borderwidth=2,
-                                                              justify='center')
+                                                              justify='center',
+                                                              background='#E8E8CC')
         Name_box.pack(fill =X,side = RIGHT,padx=5,pady=5, expand= True)
 
         Phone_label = tk.Label(detail_frame2,
             text='Phone:',
             font=('orbitron',23),
             fg='white',
-            bg='#1E5128')
+            bg='#116530')
         Phone_label.grid(row=0,column=0,pady=5, padx= 5)
 
 
@@ -103,14 +104,15 @@ class New_shopping_page(tk.Frame):
                                                               
                             font=('orbitron',23),
                             width=15,borderwidth=2,
-                            justify= 'center')
+                            justify= 'center',
+                            background='#E8E8CC')
         Phone_box.grid(row=0,column=1,pady=5,padx=5)
 
         Age_Label = tk.Label(detail_frame2,
             text='Age:',
             font=('orbitron',23),
             fg='white',
-            bg='#1E5128')
+            bg='#116530')
         Age_Label.grid(row=0,column=2,pady=5, padx= 5)
 
 
@@ -118,21 +120,23 @@ class New_shopping_page(tk.Frame):
                                                               
                                                               font=('orbitron',23),
                                                               width=5,borderwidth=2,
-                                                              justify= 'center')
+                                                              justify= 'center',
+                                                              background='#E8E8CC')
         Age_box.grid(row=0,column=3,pady=5,padx=5)
 
         Star_Label = tk.Label(detail_frame2,
             text='Star:',
             font=('orbitron',23),
             fg='white',
-            bg='#1E5128')
+            bg='#116530')
         Star_Label.grid(row=0,column=4,pady=5, padx= 5)
 
         star_box = tk.Entry(detail_frame2,
                                                               
                                                               font=('orbitron',23),
                                                               width=5,borderwidth=2,
-                                                              justify= 'center')
+                                                              justify= 'center',
+                                                              background='#E8E8CC')
         star_box.grid(row=0,column=5,pady=5,padx=5)
 
 
@@ -216,12 +220,12 @@ class New_shopping_page(tk.Frame):
                     cb = ttk.Combobox(invoice_heading, textvariable=cb)
                     cb['values'] = prod_name
                     cb['state'] = 'readonly'
-                    cb.config(justify= CENTER, font=('orbitron',16), width= 17)
+                    cb.config(justify= CENTER, font=('orbitron',16), width= 17, background='#E8E8CC')
                     cb.grid(row=row+1,column=column)
                     cb.bind('<<ComboboxSelected>>', lambda event, x = row: option_changed(event,x))
                     itemscb.append(cb)
                 elif column == 1:  
-                    pb = tk.Entry(invoice_heading, width=14, justify= 'center', font=('orbitron',18))
+                    pb = tk.Entry(invoice_heading, width=14, justify= 'center', font=('orbitron',18),background='#E8E8CC')
                     pb.grid(row=row+1,column=column)
                     priceeb.append(pb)
                 elif column == 2:
@@ -230,12 +234,12 @@ class New_shopping_page(tk.Frame):
                                      textvariable= qbvar,
                                      style= 'My.TSpinbox',
                                      command= lambda x = row: qty_changed(x))
-                    qb.config(justify= CENTER, font=('orbitron',19),width=15)
+                    qb.config(justify= CENTER, font=('orbitron',19),width=15,background='#E8E8CC')
                     qb.grid(row=row+1,column=column)
                     #qb.config(justify= CENTER, font=('orbitron',18), width= 10)
                     qtysb.append(qb)
                 else:
-                    tb = tk.Entry(invoice_heading, width=18, justify= 'center', font=('orbitron',18))
+                    tb = tk.Entry(invoice_heading, width=18, justify= 'center', font=('orbitron',18),background='#E8E8CC')
                     tb.grid(row=row+1,column=column)
                     totaleb.append(tb)
 
@@ -248,7 +252,7 @@ class New_shopping_page(tk.Frame):
             bg='#000000')
         total_foot_Label.grid(row=10,column=2,sticky="ew")
 
-        total_box = tk.Entry(invoice_heading, width=16, justify= 'center', font=('orbitron',20))
+        total_box = tk.Entry(invoice_heading, width=16, justify= 'center', font=('orbitron',20),background='#E8E8CC')
         total_box.grid(row=10,column=3)
 
         discount_foot_Label = tk.Label(invoice_heading,
@@ -258,7 +262,7 @@ class New_shopping_page(tk.Frame):
             bg='#000000')
         discount_foot_Label.grid(row=11,column=2,sticky="ew")
 
-        discount_box = tk.Entry(invoice_heading, width=16, justify= 'center', font=('orbitron',20))
+        discount_box = tk.Entry(invoice_heading, width=16, justify= 'center', font=('orbitron',20),background='#E8E8CC')
         discount_box.grid(row=11,column=3)
 
         GT_foot_Label = tk.Label(invoice_heading,
@@ -268,7 +272,7 @@ class New_shopping_page(tk.Frame):
             bg='#000000')
         GT_foot_Label.grid(row=12,column=2,sticky="ew")
     
-        GT_box = tk.Entry(invoice_heading, width=16, justify= 'center', font=('orbitron',20))
+        GT_box = tk.Entry(invoice_heading, width=16, justify= 'center', font=('orbitron',20),background='#E8E8CC')
         GT_box.grid(row=12,column=3)
 
 
@@ -277,14 +281,14 @@ class New_shopping_page(tk.Frame):
         '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
         button_frame = tk.Frame(self,
-                                 bg='#781D42')
+                                 bg='#116530')
         button_frame.pack(expand=True, fill='both')
 
         cid_Label = tk.Label(button_frame,
                             text='Customer Id',
                             font=('orbitron',23),
                             fg='white',
-                            bg='#1E5128')
+                            bg='#116530')
         cid_Label.pack(fill=X, padx=40, pady=20)
 
         cid_box = tk.Entry(button_frame,
