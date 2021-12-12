@@ -113,3 +113,10 @@ def fetch_prod():
         prod[i['product']] = i['price']
     return prod
 
+def fetch_invoice():
+    collection = StartPage.db.invoice_db
+    return collection.find()
+
+invo = fetch_invoice()
+for i in invo:
+    print(i)

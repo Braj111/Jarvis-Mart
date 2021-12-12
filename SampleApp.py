@@ -2,13 +2,12 @@ import tkinter as tk
 from tkinter import ttk
 import StartPage
 import MenuPage
-import InsertDetail
 import ctypes
 import NewShopping
 import BestCustomer
 import FindCustomer
-import DeleteCustomer
-import InvoiceGenerator
+import Invoice_history
+
 '''
 Here We are Creating a App that connects all pages.
 Logic ------> Create all pages and store them in a bucket then raise the frame on call.(similar to Staking, i use this as this makes the transition b/w pages fast.)
@@ -34,7 +33,7 @@ class SampleApp(tk.Tk):
 		self.frames = {}
 
 		#Add newly added pages here in for loop
-		for F in (DeleteCustomer.delete_customer,FindCustomer.find_customer,BestCustomer.best_customer_page,InvoiceGenerator.invoice_generator_page,NewShopping.New_shopping_page, StartPage.StartPage,MenuPage.MenuPage,InsertDetail.Insert_detail_page):
+		for F in (Invoice_history.invoice_history,FindCustomer.find_customer,BestCustomer.best_customer_page,NewShopping.New_shopping_page, StartPage.StartPage,MenuPage.MenuPage):
 			page_name = F.__name__
 			frame = F(parent=container, controller=self)
 			self.frames[page_name] = frame

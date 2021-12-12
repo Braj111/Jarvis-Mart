@@ -50,7 +50,7 @@ class MenuPage(tk.Frame):
                                                 bg = '#3C4A3E',
                                                 relief='flat',                                
                                                 width=50,
-                                                height=3)
+                                                height=2)
         newshopping_button.pack(pady=1)
         
 
@@ -65,37 +65,51 @@ class MenuPage(tk.Frame):
                                     bg = '#3C4A3E',
                                     relief='flat',                  
                                     width=50,
-                                    height=3)
+                                    height=2)
         Update_button.pack(pady=1)
 
-        # def Delete_Entry():
-        #     controller.show_frame('delete_customer')
+        def invohis():
+            controller.show_frame('invoice_history')
             
-        # delete_student_button = tk.Button(button_frame,
-        #                                     text='Delete Customer details',
-        #                                     command=Delete_Entry,
-        #                                     font=('orbitron',15,BOLD),
-        #                                     fg='#FFCC1D',
-        #                                     bg = '#3C4A3E',
-        #                                     relief='flat',                           
-        #                                     width=50,
-        #                                     height=3)
-        # delete_student_button.pack(pady=1)
+        invoice_history_button = tk.Button(button_frame,
+                                            text='Invoice History',
+                                            command=invohis,
+                                            font=('orbitron',15,BOLD),
+                                            fg='#FFCC1D',
+                                            bg = '#3C4A3E',
+                                            relief='flat',                           
+                                            width=50,
+                                            height=2)
+        invoice_history_button.pack(pady=1)
 
 
-        def Display_All_detail():
+        def find_customer():
             controller.show_frame('find_customer')
         
-        display_detail_button = tk.Button(button_frame,
+        find_customer_button = tk.Button(button_frame,
                                             text='Find Customer',
-                                            command=Display_All_detail,
+                                            command=find_customer,
                                             font=('orbitron',15,BOLD),
                                             fg='#FFCC1D',
                                             bg = '#3C4A3E',
                                             relief='flat',                               
                                             width=50,
-                                            height=3)
-        display_detail_button.pack(pady=1)
+                                            height=2)
+        find_customer_button.pack(pady=1)
+
+        def prod_page():
+            controller.show_frame('find_customer')
+        
+        find_customer_button = tk.Button(button_frame,
+                                            text='Manage Products',
+                                            command=prod_page,
+                                            font=('orbitron',15,BOLD),
+                                            fg='#FFCC1D',
+                                            bg = '#3C4A3E',
+                                            relief='flat',                               
+                                            width=50,
+                                            height=2)
+        find_customer_button.pack(pady=1)
 
         def exit():
             parent.quit()
@@ -108,6 +122,6 @@ class MenuPage(tk.Frame):
                                 relief='flat',
                     
                                 width=50,
-                                height=3)
+                                height=2)
         exit_button.pack(pady=1)
 
