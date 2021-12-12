@@ -113,10 +113,12 @@ def fetch_prod():
         prod[i['product']] = i['price']
     return prod
 
+def fetch_products():
+    collection = MenuPage.db.prod_db
+    fetprods = collection.find({},{'_id':0})
+    return fetprods
+
 def fetch_invoice():
     collection = MenuPage.db.invoice_db
     return collection.find()
 
-invo = fetch_invoice()
-for i in invo:
-    print(i)

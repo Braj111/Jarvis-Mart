@@ -1,12 +1,12 @@
 import tkinter as tk
 from tkinter import ttk
-import StartPage
 import MenuPage
 import ctypes
 import NewShopping
 import BestCustomer
 import FindCustomer
 import Invoice_history
+import ProdUpdate
 
 '''
 Here We are Creating a App that connects all pages.
@@ -33,7 +33,7 @@ class SampleApp(tk.Tk):
 		self.frames = {}
 
 		#Add newly added pages here in for loop
-		for F in (Invoice_history.invoice_history,FindCustomer.find_customer,BestCustomer.best_customer_page,NewShopping.New_shopping_page, StartPage.StartPage,MenuPage.MenuPage):
+		for F in (ProdUpdate.prod_update,Invoice_history.invoice_history,FindCustomer.find_customer,BestCustomer.best_customer_page,NewShopping.New_shopping_page,MenuPage.MenuPage):
 			page_name = F.__name__
 			frame = F(parent=container, controller=self)
 			self.frames[page_name] = frame

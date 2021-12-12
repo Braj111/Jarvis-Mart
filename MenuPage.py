@@ -16,7 +16,10 @@ class MenuPage(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent,bg='#0B4619')
         self.controller = controller
-   
+
+        self.controller.title('Customer Management System')
+        self.controller.state('zoomed')
+
         heading_label = tk.Label(self,
                                  text='Customer-Management-System',
                                  font=('orbitron',45,'bold'),
@@ -102,7 +105,7 @@ class MenuPage(tk.Frame):
         find_customer_button.pack(pady=1)
 
         def prod_page():
-            controller.show_frame('find_customer')
+            controller.show_frame('prod_update')
         
         find_customer_button = tk.Button(button_frame,
                                             text='Manage Products',
