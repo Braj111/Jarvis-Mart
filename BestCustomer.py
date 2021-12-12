@@ -1,8 +1,9 @@
-from tkinter.constants import ANCHOR, BOTTOM, CENTER, END,FLAT, LEFT, RIGHT, TOP, X, Y
+from tkinter.constants import ANCHOR, BOTH, BOTTOM, CENTER, END,FLAT, LEFT, RIGHT, TOP, X, Y
+from tkinter.font import BOLD
 
 import MongoCommand
 import tkinter as tk
-from  tkinter import ttk
+from  tkinter import Toplevel, ttk
 from whatauto import whatsappautomation
 
 
@@ -10,7 +11,7 @@ class best_customer_page(tk.Frame):
     
     
     def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent,bg='#3d3d5c')
+        tk.Frame.__init__(self, parent,bg='#0B4619')
         self.controller = controller
 
         #################################################################
@@ -19,58 +20,57 @@ class best_customer_page(tk.Frame):
         heading_label = tk.Label(self,
                                  text='Customer-Management-System',
                                  font=('orbitron',45,'bold'),
-                                 foreground='#ffffff',
-                                 background='#3d3d5c')
+                                 foreground='#FFCC1D',
+                                 background='#0B4619')
         heading_label.pack(pady=25)
 
         best_customer_label = tk.Label(self,
                                       text='Best Customer',
-                                      font=('orbitron',23),
-                                      fg='white',
-                                      bg='#3d3d5c')
+                                      font=('orbitron',23, BOLD),
+                                      fg='#B7C304',
+                                      bg='#0B4619')
         best_customer_label.pack(fill=X)
 
-        Star_frame = tk.Frame(self,bg='#33334d')
+        Star_frame = tk.Frame(self,bg='#116530')
         Star_frame.pack(fill= X)
-        star1 = "Nil"
         selectedstar_label = tk.Label(self,
-                                      text='Showing '+star1+' star customers',
+                                      text='Select stars to see customer list',
                                       font=('orbitron',20),
                                       fg='white',
-                                      bg='#3d3d5c')
+                                      bg='#0B4619')
         selectedstar_label.pack(fill=X)
         
-        table_frame = tk.Frame(self,bg='#33334d')
+        table_frame = tk.Frame(self,bg='#116530')
         table_frame.pack(fill= X)
         
-        star_selector = tk.Frame(Star_frame,bg='#33334d')
+        star_selector = tk.Frame(Star_frame,bg='#116530')
         star_selector.pack(side=LEFT)
 
-        update_frame = tk.Frame(Star_frame,bg='#33334d')
+        update_frame = tk.Frame(Star_frame,bg='#116530')
         update_frame.pack(side=RIGHT)
 
         automsg_label = tk.Label(self,
                                       text='Send whatsapp message to the selected customers',
                                       font=('orbitron',20),
                                       fg='white',
-                                      bg='#3d3d5c')
+                                      bg='#0B4619')
         automsg_label.pack(fill=X)
 
-        msgbox_frame = tk.Frame(self, bg='#33334d')
+        msgbox_frame = tk.Frame(self, bg='#116530')
         msgbox_frame.pack(fill= X)
 
-        button_frame = tk.Frame(self, bg='#33334d')
-        button_frame.pack(fill= X)
+        button_frame = tk.Frame(self, bg='#116530')
+        button_frame.pack(fill= BOTH, expand= True)
         
 
         ################################################################
         #   Star selecting frame
         ################################################################
         star_select = tk.Label(star_selector,
-                              text='Custmer\'s Above:',
+                              text='Custmer star:',
                               font=('orbitron',23),
                               fg='white',
-                              bg = '#33334d')
+                              bg = '#116530')
         star_select.grid(row=0,column=0,pady=30)
 
         customer_type = tk.IntVar()
@@ -84,65 +84,66 @@ class best_customer_page(tk.Frame):
                 bct.insert(parent='',index = tk.END, values= tuple(i.values()))
             dis_entry.delete(0,END)
             dis_entry.insert(0,MongoCommand.fetch_discount(star))
+            selectedstar_label.configure(text="Showing "+str(star)+" star customers")
             
         onestar = tk.Radiobutton(star_selector,
-                                      text='⭐',
+                                      text='★',
                                       indicatoron=0,
                                       font=('orbitron',23),
-                                      bg='#33334d',
-                                      foreground="yellow",
+                                      bg='#3C4A3E',
+                                      foreground="#FFCC1D",
                                       command= lambda: fetchbystar(1),
                                       relief = FLAT,
                                       value= 1,
                                       variable=customer_type)                          
-        onestar.grid(row=0,column=1)
+        onestar.grid(row=0,column=1, ipadx = 2)
         twostar = tk.Radiobutton(star_selector,
-                                       text='⭐',
+                                       text='★',
                                        indicatoron=0,
                                        font=('orbitron',23),
-                                       bg='#33334d',
-                                       foreground="yellow",
+                                       bg='#3C4A3E',
+                                       foreground="#FFCC1D",
                                        command= lambda: fetchbystar(2),
                                        relief=FLAT,
                                        value= 2,
                                        variable=customer_type)                           
-        twostar.grid(row=0,column=2)
+        twostar.grid(row=0,column=2, ipadx = 2)
 
         threestar = tk.Radiobutton(star_selector,   
-                                       text='⭐',
+                                       text='★',
                                        indicatoron=0,
                                        font=('orbitron',23),
                                        command= lambda: fetchbystar(3),
-                                       bg='#33334d',
-                                       foreground="yellow",
+                                       bg='#3C4A3E',
+                                       foreground="#FFCC1D",
                                        value= 3,
                                        relief=FLAT,
                                        variable=customer_type)                           
-        threestar.grid(row=0,column=3)
+        threestar.grid(row=0,column=3, ipadx = 2)
 
         fourstar = tk.Radiobutton(star_selector,
-                                       text='⭐',
+                                       text='★',
                                        indicatoron=0,
                                        font=('orbitron',23),
                                        command= lambda: fetchbystar(4),
-                                       bg='#33334d',
-                                       foreground="yellow",
+                                       bg='#3C4A3E',
+                                       fg="#FFCC1D",
                                        value= 4,
                                        relief=FLAT,
                                        variable=customer_type)                           
-        fourstar.grid(row=0,column=4)
+        fourstar.grid(row=0,column=4, ipadx = 2)
 
         fivestar = tk.Radiobutton(star_selector,
-                                       text='⭐',
+                                       text='★',
                                        indicatoron=0,
                                        font=('orbitron',23),
                                        command= lambda: fetchbystar(5),
-                                       bg='#33334d',
-                                       foreground="yellow",
+                                       bg='#3C4A3E',
+                                       foreground="#FFCC1D",
                                        value= 5,
                                        relief=FLAT,
                                        variable=customer_type)                           
-        fivestar.grid(row=0,column=5)
+        fivestar.grid(row=0,column=5, ipadx = 2)
 
         ################################################################
         #   Table frame
@@ -183,14 +184,16 @@ class best_customer_page(tk.Frame):
 
         dis_label = tk.Label(update_frame,
                                  text='Active Discount: ',
-                                 font=('orbitron',23,'bold'),
+                                 font=('orbitron',23),
                                  foreground='#ffffff',
-                                 background='#33334d')
+                                 background='#116530')
         dis_label.grid(column=0,row=0,pady=5)
 
         dis_entry = tk.Entry(update_frame,
                              font=('orbitron',23),
-                             width=5,borderwidth=1)
+                             width=5,borderwidth=1,
+                             bg='#E8E8CC',
+                             justify=CENTER)
         dis_entry.grid(column=1,row=0,padx=5)
         
         # update function to update the active discount
@@ -200,32 +203,35 @@ class best_customer_page(tk.Frame):
             
        
         update_button = tk.Button(update_frame,
-                                 text='Update',font=('orbitron',20),
+                                 text='Update',font=('orbitron',21,BOLD),
                                  command= update,
-                                 relief='raised',fg='red',
+                                 relief='raised',fg='#3C4A3E',
+                                 bg='#FFCC1D',
                                  borderwidth = 1,
-                                 width=10,
+                                 width=9,
                                  )
         update_button.grid(column=2,row=0,padx=5)
 
         msg_entry = tk.Entry(msgbox_frame,
                              font=('orbitron',23),
                              width=40,borderwidth=3,
-                             text = 'Enter message here'
+                             text = 'Enter message here',
+                             bg='#E8E8CC',
+                             justify=CENTER
                              )
-        msg_entry.pack(fill=X, padx= 25)
-
+        msg_entry.pack(fill=X, padx= 45, pady=20)
+        button_frame.grid_anchor(anchor=CENTER)
         def menu():
             controller.show_frame('MenuPage')
             
         menu_button = tk.Button(button_frame,
-                                command=menu,fg='green',
+                                command=menu,fg='#FFCC1D',
+                                bg = '#3C4A3E',
                                 text='Menu',font=('orbitron',20),
                                 relief='raised',
                                 borderwidth=1,
-                                width=5,
-                                )
-        menu_button.pack(side=RIGHT, padx= 10)
+                                width=5)
+        menu_button.grid(row = 0, column=1, padx=10, sticky='nsew')
 
         ############################################################################
         # Whatsapp automation to send message
@@ -240,11 +246,13 @@ class best_customer_page(tk.Frame):
                 whatsappautomation(user['Phone'], message)
 
         send_button = tk.Button(button_frame,
-                                command=send,fg='green',
-                                text='send',font=('orbitron',20),
+                                command=send,fg='#3C4A3E',
+                                bg='#FFCC1D',
+                                text='Send',font=('orbitron',20, BOLD),
                                 relief='raised',
                                 borderwidth=1,
-                                width=5,
+                                width=8,
                                 )
-        send_button.pack()
+        send_button.grid(row = 0, column= 0,padx=10, sticky='nsew')
+
 
