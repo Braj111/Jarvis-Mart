@@ -13,14 +13,14 @@ class cust_class(object):
 
 
 # function prototypes
-def add_cust(name,age,phone,amount,freq,star):
+def add_cust(name,age,phone,amount,freq):
     collection = StartPage.db.customer_db
     n = collection.find({}, {"_id": 1}).sort("_id", -1).limit(1)
     for i in n:
         for j in i.values():
             num = j
     
-    new_cust = {"_id": num+1, "Name": name, "Age": age, "Phone": phone, "Amount": amount, "Frequency": freq, "Customer Score": amount/freq, "star": star}
+    new_cust = {"_id": num+1, "Name": name, "Age": age, "Phone": phone, "Amount": amount, "Frequency": freq, "Avg": 0, "star": 1}
     collection.insert_one(new_cust)
     return num+1
 

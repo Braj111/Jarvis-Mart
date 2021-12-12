@@ -4,7 +4,7 @@ import MongoCommand
 import tkinter as tk
 from tkinter import ttk
 from whatauto import whatsappautomation
-
+import datetime
 
 class New_shopping_page(tk.Frame):
     
@@ -17,7 +17,7 @@ class New_shopping_page(tk.Frame):
         heading_label = tk.Label(self,
                                  text='Customer-Management-System',
                                  font=('orbitron',45,'bold'),
-                                 foreground='#E8E8CC',
+                                 foreground='#FFCC1D',
                                  background='#0B4619')
         heading_label.pack(pady=25)
 
@@ -27,21 +27,29 @@ class New_shopping_page(tk.Frame):
         invoice_number_label = tk.Label(shopping_frame,
                                         text='Invoice No.',
                                         font=('orbitron',20),
-                                        fg='white',
+                                        fg='#E8E8CC',
                                         bg='#0B4619')
         invoice_number_label.pack(side=LEFT)
         invoicenumber = MongoCommand.get_invoice_number()
         invo_no = tk.Label(shopping_frame,
                                 text=invoicenumber,
                                 font=('orbitron',20),
-                                fg='white',
+                                fg='#E8E8CC',
                                 bg='#0B4619')
         invo_no.pack(side=LEFT)
+        dtn = datetime.datetime.now()
+        dtn = dtn.strftime("%d/%m/%Y")
+        date_label = tk.Label(shopping_frame,
+                                text=dtn,
+                                font=('orbitron',20),
+                                fg='#E8E8CC',
+                                bg='#0B4619')
+        date_label.pack(side=RIGHT)
 
         shopping_label = tk.Label(shopping_frame,
                                       text='New Shopping',
                                       font=('orbitron',23, BOLD),
-                                      fg='white',
+                                      fg='#B7C304',
                                       bg='#0B4619')
         shopping_label.pack(side = TOP)
     
@@ -145,28 +153,28 @@ class New_shopping_page(tk.Frame):
             text='Items',
             font=('orbitron',20),
             fg='white',
-            bg='#000000')
+            bg='#3C4A3E')
         item_Label.grid(row=0,column=0,sticky="ew")
 
         price_Label = tk.Label(invoice_heading,
             text='Price',
             font=('orbitron',20),
             fg='white',
-            bg='#000000')
+            bg='#3C4A3E')
         price_Label.grid(row=0,column=1,sticky="ew")
 
         qty_Label = tk.Label(invoice_heading,
             text='Quantity',
             font=('orbitron',20),
             fg='white',
-            bg='#000000')
+            bg='#3C4A3E')
         qty_Label.grid(row=0,column=2,sticky="ew")
 
         total_Label = tk.Label(invoice_heading,
             text='Total',
             font=('orbitron',20),
             fg='white',
-            bg='#000000')
+            bg='#3C4A3E')
         total_Label.grid(row=0,column=3,sticky="ew")
 
         # Fetching products from prod_db 
@@ -225,7 +233,7 @@ class New_shopping_page(tk.Frame):
                     cb.bind('<<ComboboxSelected>>', lambda event, x = row: option_changed(event,x))
                     itemscb.append(cb)
                 elif column == 1:  
-                    pb = tk.Entry(invoice_heading, width=14, justify= 'center', font=('orbitron',18),background='#E8E8CC')
+                    pb = tk.Entry(invoice_heading, width=14, justify= 'center', font=('orbitron',18))
                     pb.grid(row=row+1,column=column)
                     priceeb.append(pb)
                 elif column == 2:
@@ -249,31 +257,31 @@ class New_shopping_page(tk.Frame):
             text='Total',
             font=('orbitron',20),
             fg='white',
-            bg='#000000')
+            bg='#3C4A3E')
         total_foot_Label.grid(row=10,column=2,sticky="ew")
 
         total_box = tk.Entry(invoice_heading, width=16, justify= 'center', font=('orbitron',20),background='#E8E8CC')
-        total_box.grid(row=10,column=3)
+        total_box.grid(row=10,column=3,sticky='ewns', pady=1)
 
         discount_foot_Label = tk.Label(invoice_heading,
             text='Discount',
             font=('orbitron',20),
             fg='white',
-            bg='#000000')
-        discount_foot_Label.grid(row=11,column=2,sticky="ew")
+            bg='#3C4A3E')
+        discount_foot_Label.grid(row=11,column=2,sticky="ew",pady=1)
 
         discount_box = tk.Entry(invoice_heading, width=16, justify= 'center', font=('orbitron',20),background='#E8E8CC')
-        discount_box.grid(row=11,column=3)
+        discount_box.grid(row=11,column=3,sticky='ewns',pady=1)
 
         GT_foot_Label = tk.Label(invoice_heading,
             text='Grand Total',
-            font=('orbitron',20),
+            font=('orbitron',20, BOLD),
             fg='white',
-            bg='#000000')
-        GT_foot_Label.grid(row=12,column=2,sticky="ew")
+            bg='#3C4A3E')
+        GT_foot_Label.grid(row=12,column=2,sticky="ew",pady=1)
     
-        GT_box = tk.Entry(invoice_heading, width=16, justify= 'center', font=('orbitron',20),background='#E8E8CC')
-        GT_box.grid(row=12,column=3)
+        GT_box = tk.Entry(invoice_heading, width=16, justify= 'center', font=('orbitron',20, BOLD),background='#E8E8CC')
+        GT_box.grid(row=12,column=3,sticky='ewns',pady=1)
 
 
         '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -286,8 +294,8 @@ class New_shopping_page(tk.Frame):
 
         cid_Label = tk.Label(button_frame,
                             text='Customer Id',
-                            font=('orbitron',23),
-                            fg='white',
+                            font=('orbitron',24, BOLD),
+                            fg='#B7C304',
                             bg='#116530')
         cid_Label.pack(fill=X, padx=40, pady=20)
 
@@ -295,6 +303,7 @@ class New_shopping_page(tk.Frame):
                                                               
                             font=('orbitron',23),
                             width=8,borderwidth=2,
+                            background='#E8E8CC',
                             justify= 'center')
         cid_box.pack(fill=X, padx=100, pady=10)
 
@@ -318,7 +327,8 @@ class New_shopping_page(tk.Frame):
         validate_button = tk.Button(button_frame,
                                  text='Validate',font=('orbitron',20),
                                  command= validate,
-                                 relief='raised',fg='Green',
+                                 bg = '#FFCC1D',
+                                 relief='raised',fg='Black',
                                  borderwidth = 1,
                                  width=10,
                                  )
@@ -339,6 +349,7 @@ class New_shopping_page(tk.Frame):
         generate_cid_button = tk.Button(button_frame,
                                  text='Generate Customer Id',font=('orbitron',20),
                                  command= gencid,
+                                 bg = '#FFCC1D',
                                  relief='raised',fg='Green',
                                  borderwidth = 1,
                                  )
@@ -385,7 +396,8 @@ class New_shopping_page(tk.Frame):
         generate_invoice_button = tk.Button(button_frame,
                                  text='Generate Invoice',font=('orbitron',23,BOLD),
                                  command= generate_bill,
-                                 relief='raised',fg='Green',
+                                 bg = '#FFCC1D',
+                                 relief='raised',fg='#3C4A3E',
                                  borderwidth = 1)
         generate_invoice_button.pack(side= BOTTOM,anchor= CENTER, pady=20)       
 
@@ -393,7 +405,8 @@ class New_shopping_page(tk.Frame):
             controller.show_frame('MenuPage')
             
         menu_button = tk.Button(button_frame,
-                                command=menu,fg='green',
+                                command=menu,fg='black',
+                                bg = '#6B7B6E',
                                 text='Menu',font=('orbitron',20),
                                 relief='raised',
                                 borderwidth=1,
