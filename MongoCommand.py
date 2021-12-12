@@ -1,5 +1,5 @@
 # imports
-from StartPage import StartPage
+from MenuPage import MenuPage
 import datetime
 
 # class
@@ -14,7 +14,7 @@ class cust_class(object):
 
 # function prototypes
 def add_cust(name,age,phone):
-    collection = StartPage.db.customer_db
+    collection = MenuPage.db.customer_db
     n = collection.find({}, {"_id": 1}).sort("_id", -1).limit(1)
     for i in n:
         for j in i.values():
@@ -28,42 +28,42 @@ def add_cust(name,age,phone):
 
 # remove function - 
 def remove_cust(cust_id):
-    collection = StartPage.db.customer_db
+    collection = MenuPage.db.customer_db
     collection.delete_one({"_id": cust_id})
     
 
 
 # FUNCTIONS TO FETCH DATA
 def fetch_by_id(cust_id):
-    collection = StartPage.db.customer_db
+    collection = MenuPage.db.customer_db
     cust = collection.find_one({"_id": cust_id})
     customer = cust_class(cust)
     return customer
 
 def fetch_by_phone(phone):
-    collection = StartPage.db.customer_db
+    collection = MenuPage.db.customer_db
     cust = collection.find_one({"Phone": phone})
     customer = cust_class(cust)
     return customer
     
 def fetch_by_star(star):
-    collection = StartPage.db.customer_db
+    collection = MenuPage.db.customer_db
     cust = collection.find({"star": star}).sort("_id", 1)
     return cust
 
 def fetch_discount(star):
-    collection = StartPage.db.Discount_db
+    collection = MenuPage.db.Discount_db
     st = collection.find_one({"star": star},{"discount": 1, "_id": 0})
     return st['discount']
 
 def update_discount(star,dis):
-    collection = StartPage.db.Discount_db
+    collection = MenuPage.db.Discount_db
     collection.find_one_and_update({"star":star},{"$set":{"discount":dis}})
 
 
 # this funciton updates the star by customer id
 def star_update(cust_id):
-    collection = StartPage.db.customer_db
+    collection = MenuPage.db.customer_db
     customer = fetch_by_id(cust_id)
     avg = customer.Avg
     if avg  < 1000:
@@ -80,7 +80,7 @@ def star_update(cust_id):
 
     
 def update_cusotmer(id, billamount):
-    collection = StartPage.db.customer_db
+    collection = MenuPage.db.customer_db
     
     collection.find_one_and_update({"_id":id},{"$inc":{"Amount": billamount,'Frequency': 1}})
     customer = fetch_by_id(id)
@@ -88,7 +88,7 @@ def update_cusotmer(id, billamount):
     star_update(id)
 
 def get_invoice_number():
-    collection = StartPage.db.invoice_db
+    collection = MenuPage.db.invoice_db
     n = collection.find({}, {"_id": 1}).sort("_id", -1).limit(1)
     for i in n:
         for j in i.values():
@@ -97,7 +97,7 @@ def get_invoice_number():
 
 
 def invoice_creation(id, billamount, items, discount):
-    collection = StartPage.db.invoice_db
+    collection = MenuPage.db.invoice_db
     dtn = datetime.datetime.now()
     dtn = dtn.strftime("%d/%m/%Y %H:%M:%S")
     invoice = {'_id': get_invoice_number(), 'cid': id, 'invamount': billamount,'discount': discount, 'items': items, 'invdate':dtn, }
@@ -106,7 +106,7 @@ def invoice_creation(id, billamount, items, discount):
 
 
 def fetch_prod():
-    collection = StartPage.db.prod_db
+    collection = MenuPage.db.prod_db
     prod = dict()
     fetprods = collection.find({},{'_id':0})
     for i in fetprods:
@@ -114,7 +114,7 @@ def fetch_prod():
     return prod
 
 def fetch_invoice():
-    collection = StartPage.db.invoice_db
+    collection = MenuPage.db.invoice_db
     return collection.find()
 
 invo = fetch_invoice()

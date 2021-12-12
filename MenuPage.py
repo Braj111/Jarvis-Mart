@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter.constants import BOTTOM
 from tkinter.font import BOLD
+import pymongo
 
 #=========================
 #Creating Menu Page=======
@@ -8,6 +9,9 @@ from tkinter.font import BOLD
 
 
 class MenuPage(tk.Frame):
+    #Mongo Connection
+    client = pymongo.MongoClient("mongodb+srv://harsh8833:harsh8833@cluster0.9hs91.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+    db = client["g10"]
 
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent,bg='#0B4619')
@@ -45,11 +49,11 @@ class MenuPage(tk.Frame):
         newshopping_button = tk.Button(button_frame,
                                                 text='New Shopping',
                                                 command= New_shopping_page,
-                                                font=('orbitron',15,BOLD),
+                                                font=('orbitron',18,BOLD),
                                                 fg='#FFCC1D',
                                                 bg = '#3C4A3E',
                                                 relief='flat',                                
-                                                width=50,
+                                                width=40,
                                                 height=2)
         newshopping_button.pack(pady=1)
         
@@ -60,11 +64,11 @@ class MenuPage(tk.Frame):
         Update_button = tk.Button(button_frame,
                                     text='Best Customer',
                                     command=best_customer_page,
-                                    font=('orbitron',15,BOLD),
+                                    font=('orbitron',18,BOLD),
                                     fg='#FFCC1D',
                                     bg = '#3C4A3E',
                                     relief='flat',                  
-                                    width=50,
+                                    width=40,
                                     height=2)
         Update_button.pack(pady=1)
 
@@ -74,11 +78,11 @@ class MenuPage(tk.Frame):
         invoice_history_button = tk.Button(button_frame,
                                             text='Invoice History',
                                             command=invohis,
-                                            font=('orbitron',15,BOLD),
+                                            font=('orbitron',18,BOLD),
                                             fg='#FFCC1D',
                                             bg = '#3C4A3E',
                                             relief='flat',                           
-                                            width=50,
+                                            width=40,
                                             height=2)
         invoice_history_button.pack(pady=1)
 
@@ -89,11 +93,11 @@ class MenuPage(tk.Frame):
         find_customer_button = tk.Button(button_frame,
                                             text='Find Customer',
                                             command=find_customer,
-                                            font=('orbitron',15,BOLD),
+                                            font=('orbitron',18,BOLD),
                                             fg='#FFCC1D',
                                             bg = '#3C4A3E',
                                             relief='flat',                               
-                                            width=50,
+                                            width=40,
                                             height=2)
         find_customer_button.pack(pady=1)
 
@@ -103,11 +107,11 @@ class MenuPage(tk.Frame):
         find_customer_button = tk.Button(button_frame,
                                             text='Manage Products',
                                             command=prod_page,
-                                            font=('orbitron',15,BOLD),
+                                            font=('orbitron',18,BOLD),
                                             fg='#FFCC1D',
                                             bg = '#3C4A3E',
                                             relief='flat',                               
-                                            width=50,
+                                            width=40,
                                             height=2)
         find_customer_button.pack(pady=1)
 
@@ -116,12 +120,12 @@ class MenuPage(tk.Frame):
         exit_button = tk.Button(button_frame,
                                 text='Exit',
                                 command=exit,
-                                font=('orbitron',15,BOLD),
+                                font=('orbitron',18,BOLD),
                                 fg='Red',
                                 bg = '#3C4A3E',
                                 relief='flat',
                     
-                                width=50,
+                                width=40,
                                 height=2)
         exit_button.pack(pady=1)
 
