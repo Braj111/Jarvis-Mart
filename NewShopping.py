@@ -5,6 +5,7 @@ import tkinter as tk
 from tkinter import ttk
 from whatauto import whatsappautomation
 import datetime
+import tkinter.messagebox
 
 class New_shopping_page(tk.Frame):
     
@@ -12,7 +13,7 @@ class New_shopping_page(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent,bg='#0B4619')
         self.controller = controller
-
+        
 
         heading_label = tk.Label(self,
                                  text='Customer-Management-System',
@@ -372,8 +373,16 @@ class New_shopping_page(tk.Frame):
             total_box.delete(0, END)
             discount_box.delete(0, END)
             cid_box.delete(0, END)
+        
+        def wait(message):
+            win = tk.Toplevel(self)
+            win.transient()
+            win.title('Please Wait...')
+            tk.Label(win, text=message).pack()
+            return win
+        
 
-
+      
         # Generate bill function triggers whatsapp automation and clear entry boxes, push invoice in database
         def generate_bill():
             cid = int(cid_box.get())
@@ -385,14 +394,15 @@ class New_shopping_page(tk.Frame):
             for i in itemscb:
                 if len(i.get()) != 0:
                     items.append(i.get())
-            discount = discount_box.get().replace('%', '')
+            discount = discount_box.get()
             invno = MongoCommand.invoice_creation(cid, billamount,items, discount)
             message = "Hello "+customer.Name+", Thanks for visiting us! You have just compleated shopping of "+bamt+" on Invoice No. xyz. Keep shopping to increase your stars and get exciting discount in future"
             whatsappautomation(customer.Phone, message)
             newinvoicenumber = MongoCommand.get_invoice_number()
             invo_no.configure(text=newinvoicenumber)
             clear_stuffs()
-       
+            tkinter.messagebox.showinfo('Generated', 'Invoice Generated and Sent to whatsapp')
+        
         generate_invoice_button = tk.Button(button_frame,
                                  text='Generate Invoice',font=('orbitron',23,BOLD),
                                  command= generate_bill,
@@ -412,3 +422,4 @@ class New_shopping_page(tk.Frame):
                                 borderwidth=1,
                                 width=5)
         menu_button.pack(side = BOTTOM,anchor= CENTER, pady=20)
+  
