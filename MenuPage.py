@@ -3,7 +3,7 @@ from tkinter.constants import BOTTOM
 from tkinter.font import BOLD
 
 #=========================
-#Creating Menu Page======
+#Creating Menu Page=======
 #=========================
 
 
@@ -38,33 +38,20 @@ class MenuPage(tk.Frame):
         button_frame = tk.Frame(self,bg='#116530')
         button_frame.pack(fill='both',expand=True)
 
-        # def insert_detail_page():
-        #     controller.show_frame('Insert_detail_page')
-            
-        # withdraw_button = tk.Button(button_frame,
-        #                             text='Insert Customer Detail',
-        #                             command=insert_detail_page,
-        #                             relief='flat',
-        #                             font=('orbitron',12),
-        #                          
-        #                             width=50,
-        #                             height=3)
-        # withdraw_button.pack()
 
         def New_shopping_page():
             controller.show_frame('New_shopping_page')
             
-        Search_Student_Detail_button = tk.Button(button_frame,
+        newshopping_button = tk.Button(button_frame,
                                                 text='New Shopping',
                                                 command= New_shopping_page,
                                                 font=('orbitron',15,BOLD),
                                                 fg='#FFCC1D',
                                                 bg = '#3C4A3E',
-                                                relief='flat',
-                                    
+                                                relief='flat',                                
                                                 width=50,
                                                 height=3)
-        Search_Student_Detail_button.pack(pady=1)
+        newshopping_button.pack(pady=1)
         
 
         def best_customer_page():
@@ -76,26 +63,24 @@ class MenuPage(tk.Frame):
                                     font=('orbitron',15,BOLD),
                                     fg='#FFCC1D',
                                     bg = '#3C4A3E',
-                                    relief='flat',
-                        
+                                    relief='flat',                  
                                     width=50,
                                     height=3)
         Update_button.pack(pady=1)
 
-        def Delete_Entry():
-            controller.show_frame('delete_customer')
+        # def Delete_Entry():
+        #     controller.show_frame('delete_customer')
             
-        delete_student_button = tk.Button(button_frame,
-                                            text='Delete Customer details',
-                                            command=Delete_Entry,
-                                            font=('orbitron',15,BOLD),
-                                            fg='#FFCC1D',
-                                            bg = '#3C4A3E',
-                                            relief='flat',
-                                
-                                            width=50,
-                                            height=3)
-        delete_student_button.pack(pady=1)
+        # delete_student_button = tk.Button(button_frame,
+        #                                     text='Delete Customer details',
+        #                                     command=Delete_Entry,
+        #                                     font=('orbitron',15,BOLD),
+        #                                     fg='#FFCC1D',
+        #                                     bg = '#3C4A3E',
+        #                                     relief='flat',                           
+        #                                     width=50,
+        #                                     height=3)
+        # delete_student_button.pack(pady=1)
 
 
         def Display_All_detail():
@@ -107,8 +92,7 @@ class MenuPage(tk.Frame):
                                             font=('orbitron',15,BOLD),
                                             fg='#FFCC1D',
                                             bg = '#3C4A3E',
-                                            relief='flat',
-                                
+                                            relief='flat',                               
                                             width=50,
                                             height=3)
         display_detail_button.pack(pady=1)

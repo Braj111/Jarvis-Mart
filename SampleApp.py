@@ -42,7 +42,7 @@ class SampleApp(tk.Tk):
 		self.show_frame("MenuPage")# Add the page Name which you want to show when the app start's.
 	def show_frame(self, page_name):
 		frame = self.frames[page_name]
-		frame.tkraise()
+		frame.tkraise()  
 
 		
 if __name__ == "__main__":

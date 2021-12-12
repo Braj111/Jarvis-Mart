@@ -322,7 +322,7 @@ class New_shopping_page(tk.Frame):
             discount_box.insert(0,discount_text)
             star_box.delete(0, END)
             star_box.insert(0, customer.star)
-            GT()
+            GT() 
             
 
         validate_button = tk.Button(button_frame,
@@ -405,7 +405,7 @@ class New_shopping_page(tk.Frame):
                                  relief='raised',fg='#3C4A3E',
                                  borderwidth = 1)
         generate_invoice_button.pack(side= BOTTOM,anchor= CENTER, pady=20)       
-
+        
         def menu():
             controller.show_frame('MenuPage')
             
