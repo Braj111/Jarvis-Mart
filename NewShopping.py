@@ -295,7 +295,7 @@ class New_shopping_page(tk.Frame):
         cid_Label = tk.Label(button_frame,
                             text='Customer Id',
                             font=('orbitron',24, BOLD),
-                            fg='#B7C304',
+                            fg='white',
                             bg='#116530')
         cid_Label.pack(fill=X, padx=40, pady=20)
 
@@ -327,8 +327,8 @@ class New_shopping_page(tk.Frame):
         validate_button = tk.Button(button_frame,
                                  text='Validate',font=('orbitron',20),
                                  command= validate,
-                                 bg = '#FFCC1D',
-                                 relief='raised',fg='Black',
+                                 bg = '#3C4A3E',
+                                 relief='raised',fg='#FFCC1D',
                                  borderwidth = 1,
                                  width=10,
                                  )
@@ -349,8 +349,8 @@ class New_shopping_page(tk.Frame):
         generate_cid_button = tk.Button(button_frame,
                                  text='Generate Customer Id',font=('orbitron',20),
                                  command= gencid,
-                                 bg = '#FFCC1D',
-                                 relief='raised',fg='Green',
+                                 bg = '#3C4A3E',
+                                 relief='raised',fg='#FFCC1D',
                                  borderwidth = 1,
                                  )
         generate_cid_button.pack(anchor= CENTER, pady=10)
@@ -405,8 +405,8 @@ class New_shopping_page(tk.Frame):
             controller.show_frame('MenuPage')
             
         menu_button = tk.Button(button_frame,
-                                command=menu,fg='black',
-                                bg = '#6B7B6E',
+                                command=menu,fg='#FFCC1D',
+                                bg = '#3C4A3E',
                                 text='Menu',font=('orbitron',20),
                                 relief='raised',
                                 borderwidth=1,
