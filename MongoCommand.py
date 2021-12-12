@@ -122,3 +122,7 @@ def fetch_invoice():
     collection = MenuPage.db.invoice_db
     return collection.find()
 
+def insert_product(name, price):
+    collection = MenuPage.db.prod_db
+    doc = {'product': name, 'price': price}
+    collection.insert_one(doc)
