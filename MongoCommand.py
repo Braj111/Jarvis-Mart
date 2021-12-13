@@ -130,6 +130,8 @@ def insert_product(name, price):
 
 def update_price(name, price):
     collection = MenuPage.db.prod_db
-   
     collection.find_one_and_update({'product': name},{"$set":{'price': price}})
 
+def delete_prod(name):
+    collection = MenuPage.db.prod_db
+    collection.find_one_and_delete({'product': name})

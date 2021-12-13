@@ -176,7 +176,6 @@ class best_customer_page(tk.Frame):
     
         bct.pack(fill= X)
         
-        # table style
         
 
         ######################################################################

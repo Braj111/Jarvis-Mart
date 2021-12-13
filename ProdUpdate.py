@@ -112,6 +112,7 @@ class prod_update(tk.Frame):
             for row in bct.get_children():
                 bct.delete(row)
             setprod()
+            clear()
             tkinter.messagebox.showinfo('Successfull!', 'Product: '+name+', Price: '+str(price)+' added')
 
 
@@ -164,11 +165,14 @@ class prod_update(tk.Frame):
         priceres_box.grid(row=6,column=1, sticky=N)
 
         def update():
-            pass
+            name = prodnameres_box.get()
+            price = int(priceres_box.get())
+            MongoCommand.update_price(name, price)
             for row in bct.get_children():
                 bct.delete(row)
             setprod()
-            #tkinter.messagebox.showinfo('Successfull!', 'Product: '+name+', Price: '+str(price)+' added')
+            clear()
+            tkinter.messagebox.showinfo('Successfull!', 'Product: '+name+', Price: '+str(price)+' updated')
 
 
         update_button = tk.Button(body_frame25,
@@ -183,7 +187,14 @@ class prod_update(tk.Frame):
         update_button.grid(row=7, column=1, pady=5)
 
         def delprod():
-            pass
+            name = prodnameres_box.get()
+            MongoCommand.delete_prod(name)
+            for row in bct.get_children():
+                bct.delete(row)
+            setprod()
+            clear()
+            tkinter.messagebox.showinfo('Successfull!', 'Product: '+name+', deleted')
+            
         del_button = tk.Button(body_frame25,
                                 text='Delete Product',
                                 font=('orbitron',20, BOLD),

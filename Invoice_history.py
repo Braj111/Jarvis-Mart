@@ -73,6 +73,5 @@ class invoice_history(tk.Frame):
                                 text='Menu',font=('orbitron',20),
                                 relief='raised',
                                 borderwidth=1,
-                                width=5)
-                                                     
-        menu_button.pack()
+                                width=5)                                               
+        menu_button.pack(padx=5)
