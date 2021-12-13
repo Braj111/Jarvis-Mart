@@ -17,11 +17,11 @@ class MenuPage(tk.Frame):
         tk.Frame.__init__(self, parent,bg='#0B4619')
         self.controller = controller
 
-        self.controller.title('Customer Management System')
+        self.controller.title('Jarvis Mart')
         self.controller.state('zoomed')
 
         heading_label = tk.Label(self,
-                                 text='Customer-Management-System',
+                                 text='Jarvis Mart',
                                  font=('orbitron',45,'bold'),
                                  foreground='#FFCC1D',
                                  background='#0B4619')

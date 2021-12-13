@@ -11,7 +11,7 @@ class find_customer(tk.Frame):
         tk.Frame.__init__(self, parent,bg='#0B4619')
         self.controller = controller
         heading_label = tk.Label(self,
-                                 text='Customer-Management-System',
+                                 text='Jarvis Mart',
                                  font=('orbitron',45,BOLD),
                                  foreground='#FFCC1D',
                                  background='#0B4619')

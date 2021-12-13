@@ -18,7 +18,7 @@ class best_customer_page(tk.Frame):
         # Frames and Label
         #################################################################
         heading_label = tk.Label(self,
-                                 text='Customer-Management-System',
+                                 text='Jarvis Mart',
                                  font=('orbitron',45,'bold'),
                                  foreground='#FFCC1D',
                                  background='#0B4619')

@@ -16,7 +16,7 @@ class New_shopping_page(tk.Frame):
         
 
         heading_label = tk.Label(self,
-                                 text='Customer-Management-System',
+                                 text='Jarvis Mart',
                                  font=('orbitron',45,'bold'),
                                  foreground='#FFCC1D',
                                  background='#0B4619')
@@ -391,7 +391,7 @@ class New_shopping_page(tk.Frame):
                     items.append(i.get())
             discount = discount_box.get()
             invno = MongoCommand.invoice_creation(cid, billamount,items, discount)
-            message = "*SHOP NAME*\nHey "+customer.Name+" Thank you for being a great customer, \n=======================\nInvoice No: "+str(invoicenumber)+"\nTotal Amount Paid : "+bamt+"\nYour Savings : "+discount+"\nStar: "+str(customer.star)+"\n=======================\nKeep Shopping to increase your star and get exicting offers and discount in future\n See you soon😊"
+            message = "*Jarvis Mart*\n\nHey "+customer.Name+" Thank you for being a great customer, \n=======================\nInvoice No: "+str(invoicenumber)+"\nTotal Amount Paid : "+bamt+"\nYour Savings : "+discount+"\nStar: "+str(customer.star)+"\n=======================\nKeep Shopping to increase your star and get exicting offers and discount in future\n\nSee you soon😊"
 
             whatsappautomation(customer.Phone, message)
             newinvoicenumber = MongoCommand.get_invoice_number()
