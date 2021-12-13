@@ -126,3 +126,10 @@ def insert_product(name, price):
     collection = MenuPage.db.prod_db
     doc = {'product': name, 'price': price}
     collection.insert_one(doc)
+
+
+def update_price(name, price):
+    collection = MenuPage.db.prod_db
+   
+    collection.find_one_and_update({'product': name},{"$set":{'price': price}})
+
