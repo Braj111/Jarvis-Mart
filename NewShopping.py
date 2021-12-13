@@ -391,7 +391,8 @@ class New_shopping_page(tk.Frame):
                     items.append(i.get())
             discount = discount_box.get()
             invno = MongoCommand.invoice_creation(cid, billamount,items, discount)
-            message = "Hello "+customer.Name+", Thanks for visiting us! You have just compleated shopping of "+bamt+" on Invoice No. xyz. Keep shopping to increase your stars and get exciting discount in future"
+            message = "*SHOP NAME*\nHey "+customer.Name+" Thank you for being a great customer, \n=======================\nInvoice No: "+str(invoicenumber)+"\nTotal Amount Paid : "+bamt+"\nYour Savings : "+discount+"\nStar: "+str(customer.star)+"\n=======================\nKeep Shopping to increase your star and get exicting offers and discount in future\n See you soon😊"
+
             whatsappautomation(customer.Phone, message)
             newinvoicenumber = MongoCommand.get_invoice_number()
             invo_no.configure(text=newinvoicenumber)
