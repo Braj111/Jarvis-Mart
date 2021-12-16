@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import ttk
 import MenuPage
 import ctypes
 import NewShopping
@@ -7,17 +6,6 @@ import BestCustomer
 import FindCustomer
 import Invoice_history
 import ProdUpdate
-
-'''
-Here We are Creating a App that connects all pages.
-Logic ------> Create all pages and store them in a bucket then raise the frame on call.(similar to Staking, i use this as this makes the transition b/w pages fast.)
-Function used to call page is show_frame use this on every page to change page.
-
-IMPORTANT: Import module of new page and then add class of the frame on for loop.
-
-we write all pages class in for loop so that we can create all pages when our Sample App Class is initiated.
-'''
-
 
 class SampleApp(tk.Tk):
 	ctypes.windll.shcore.SetProcessDpiAwareness(1)
@@ -27,9 +15,6 @@ class SampleApp(tk.Tk):
 		container.pack(side="top", fill="both" ,expand=True)
 		container.grid_rowconfigure(0, weight =1)
 		container.grid_columnconfigure(0, weight=1)
-
-		
-		
 		self.frames = {}
 
 		#Add newly added pages here in for loop
@@ -43,7 +28,6 @@ class SampleApp(tk.Tk):
 		frame = self.frames[page_name]
 		frame.tkraise()  
 
-		
 if __name__ == "__main__":
     app = SampleApp() #Calling the App class
     app.mainloop() #helding the main class in loop to keep our ui responsive

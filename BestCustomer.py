@@ -67,7 +67,7 @@ class best_customer_page(tk.Frame):
         #   Star selecting frame
         ################################################################
         star_select = tk.Label(star_selector,
-                              text='Custmer star:',
+                              text='Customer star:',
                               font=('orbitron',23),
                               fg='white',
                               bg = '#116530')
